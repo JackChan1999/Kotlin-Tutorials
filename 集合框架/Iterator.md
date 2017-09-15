@@ -15,6 +15,30 @@ public interface Iterable<out T> {
 - hasNext() 
 
 ```kotlin
+public interface Iterator<out T> {
+    /**
+     * Returns the next element in the iteration.
+     */
+    public operator fun next(): T
+
+    /**
+     * Returns `true` if the iteration has more elements.
+     */
+    public operator fun hasNext(): Boolean
+}
+```
+```kotlin
+/**
+ * Given an [iterator] function constructs an [Iterable] instance that returns values through the [Iterator]
+ * provided by that function.
+ */
+@kotlin.internal.InlineOnly
+public inline fun <T> Iterable(crossinline iterator: () -> Iterator<T>): Iterable<T> = object : Iterable<T> {
+    override fun iterator(): Iterator<T> = iterator()
+}
+```
+
+```kotlin
 fun main(args: Array<String>) {
 
     var x = 5
