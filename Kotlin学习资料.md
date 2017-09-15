@@ -75,7 +75,7 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 （5）Kotlin 视频教程
 
-竟然还有视频教程~~
+竟然还有视频教程
 
 > Kotlin从入门到『放弃』系列 视频教程
 >
