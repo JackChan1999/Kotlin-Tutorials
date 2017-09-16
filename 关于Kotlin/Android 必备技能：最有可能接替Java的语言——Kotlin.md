@@ -80,7 +80,7 @@ buildscript {
 
 ## 2.1 通用的集合框架
 
-我们都知道Jvm上面的语言，像什么Java、Groovy、Jython啥的，都是要编成虚拟机的字节码的，一旦编成字节码，在一定程度上大家就都平等了。
+我们都知道Jvm上面的语言，像什么Java、Groovy、python啥的，都是要编成虚拟机的字节码的，一旦编成字节码，在一定程度上大家就都平等了。
 
 > 英雄不问出身啊
 
@@ -90,30 +90,30 @@ buildscript {
 
 ```kotlin
 //实际上就是创建一个ArrayList
-    val list = arrayListOf(1,2,3,4)
-    list.add(5)
-    list.remove(3)
-    for(item in list){
-        println(item)
-    }
+val list = arrayListOf(1,2,3,4)
+list.add(5)
+list.remove(3)
+for(item in list){
+    println(item)
+}
 ```
 
 当然，Kotlin标准库也对这些做了扩展，我们在享用Java世界的一切资源的同时，还能比原生Java代码更滋润，真是爽爆有木有：
 
 ```kotlin
- val list = arrayListOf(1, 2, 3, 4, 5)
-    //doubleList = [2,4,6,8,10]
-    val doubleList = list.map { 
-        it * 2
-    }
-    //oddList = [1,3,5]
-    val oddList = list.filter{
-        it % 2 == 1
-    }
-    //将list挨个打印出来
-    list.forEach { 
-        println(it)
-    }
+val list = arrayListOf(1, 2, 3, 4, 5)
+//doubleList = [2,4,6,8,10]
+val doubleList = list.map { 
+    it * 2
+}
+//oddList = [1,3,5]
+val oddList = list.filter{
+    it % 2 == 1
+}
+//将list挨个打印出来
+list.forEach { 
+    println(it)
+}
 ```
 
 ## 2.2 与Java交互

@@ -18,7 +18,7 @@
 
 应该学，作为一个有追求的程序员，你不仅要学 Kotlin，而且要了解各类型的语言，这跟你什么基础没有关系，大家都有过一个什么都不会的曾经。
 
-当然，现阶段，Kotlin 跟 Java 关系是在密切，只要你希望用 Kotlin 开发 Jvm、Android 相关的应用程序，Java 你就必须学会，而且要学好，因为它太重要了，除了大量的 Jdk、Sdk 源码都是 Java 的以及大量的资料都是 Java 的 之外，Java 更是 Java 系语言的标杆，你需要学习掌握它，了解这一族语言的应用思路，和开发习惯，甚至了解 Java 的弊病来真正明白为什么会有 Kotlin、Groovy、Scala 这样的语言诞生。
+当然，现阶段，Kotlin 跟 Java 关系实在密切，只要你希望用 Kotlin 开发 Jvm、Android 相关的应用程序，Java 你就必须学会，而且要学好，因为它太重要了，除了大量的 Jdk、Sdk 源码都是 Java 的以及大量的资料都是 Java 的 之外，Java 更是 Java 系语言的标杆，你需要学习掌握它，了解这一族语言的应用思路，和开发习惯，甚至了解 Java 的弊病来真正明白为什么会有 Kotlin、Groovy、Scala 这样的语言诞生。
 
 ### 不学 Java 可以直接搞 Android 开发吗？
 

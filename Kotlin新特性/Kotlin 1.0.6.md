@@ -1,12 +1,12 @@
 # Kotlin 1.0.6 
 
-> 我把所有文章和视频都放到了 [Github](https://github.com/enbandari/Kotlin-Tutorials) 上 ，如果你喜欢，请给个 Star，谢谢~
+> 我把所有文章和视频都放到了 [Github](https://github.com/enbandari/Kotlin-Tutorials) 上 ，如果你喜欢，请给个 Star，谢谢
 
 在上周二，Kotlin 1.0.6 发布啦！这次更新主要是工具更新和bug修复。本文的内容主要来自[官方博客](https://blog.jetbrains.com/kotlin/)。
 
 ## IDE 插件的更新
 
-* 1. try-finally 转换为 use() 
+- try-finally 转换为 use() 
 
 通常我们在进行 IO 操作的时候，我们并不希望异常影响我们程序的执行，所以我们需要对异常进行捕获，但捕获的话我们也没有必要处理，所以写下来的就是下面的形式：
 
@@ -29,16 +29,16 @@ reader.use{
 
 ![](images/try.gif)
 
-* 2. 补全具名参数
+* 补全具名参数
 
 通常我们在编写代码的时候，函数入参都会按照顺序一个一个传入，不过随着代码量的增加，特别是对于参数较多的函数，一长串的代码看上去会让我们感到非常的头疼。所以，这次更新 Kotlin 还为我们带来了自动补全具名参数的功能。
 
 ![](images/args.gif)
 
-* 3. 删除空构造方法的声明
-* 4. 合并声明和赋值
-* 5. inline 函数的问题修复和调试工具的优化
-* 6. 提示、KDoc 和 Quick Doc 相关的较多问题的修复
+* 删除空构造方法的声明
+* 合并声明和赋值
+* inline 函数的问题修复和调试工具的优化
+* 提示、KDoc 和 Quick Doc 相关的较多问题的修复
 
 ## Android 相关更新
 

@@ -5,6 +5,7 @@
 * [关于Kotlin](关于Kotlin\README.md)
     * [你应该学 Kotlin 吗？](关于Kotlin\你应该学 Kotlin 吗？.md)
     * [Android 必备技能：最有可能接替Java的语言——Kotlin](关于Kotlin\Android 必备技能：最有可能接替Java的语言——Kotlin.md)
+    * [你为什么需要 Kotlin](关于Kotlin\你为什么需要 Kotlin.md)
     * [为什么我要改用Kotlin](关于Kotlin\为什么我要改用Kotlin.md)
     * [如何看待 Kotlin 成为 Android 官方支持开发语言？](关于Kotlin\如何看待 Kotlin 成为 Android 官方支持开发语言？.md)
 * [面向对象](面向对象\README.md)
