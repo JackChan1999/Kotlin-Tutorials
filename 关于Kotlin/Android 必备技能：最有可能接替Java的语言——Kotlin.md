@@ -17,8 +17,14 @@
 
 **用Kotlin创建一个数据类**
 
-```
-data class Mondai(var index: Int = 0,                  var title: String = "",                  val ans: ArrayList<String> = ArrayList(),                  var correct: Int = 0,                  var comment: String = "",                  var color: String = "",                  private var lives: Int = 50)
+```kotlin
+data class Mondai(var index: Int = 0,
+                  var title: String = "",
+                  val ans: ArrayList<String> = ArrayList(),
+                  var correct: Int = 0,
+                  var comment: String = "",
+                  var color: String = "",
+                  private var lives: Int = 50)
 ```
 
 最初是在intelliJ的源码中看到Kotlin的，那时候Kotlin的版本还不太稳定，所以源码总是编译不过，真是要抓狂啊，还骂『什么破玩意儿！为什么又出来新语言了？Groovy还没怎么学会，又来个Kotlin！』话说，Kotlin，难道是『靠它灵』的意思？？
@@ -37,8 +43,29 @@ Kotlin开发当然使用JetBrain系列的IDE，实际上intelliJ idea 15发布�
 
 接下来我们用Android Studio创建一个Android工程，比如叫做HelloKotlin，在app目录下面的build.gradle文件中添加下面的配置：
 
-```
-apply plugin: 'kotlin-android'apply plugin: 'kotlin-android-extensions'ext.anko_version = '0.8.2'ext.kotlin_version = '1.0.0'……dependencies{……    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"    compile "org.jetbrains.anko:anko-sdk15:$anko_version"    compile "org.jetbrains.anko:anko-support-v4:$anko_version"    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"……}buildscript {    repositories {        jcenter()    }    dependencies {        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"    }}……
+```kotlin
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+ext.anko_version = '0.8.2'
+ext.kotlin_version = '1.0.0'
+……
+dependencies{
+……
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.anko:anko-sdk15:$anko_version"
+    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+……
+}
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+……
 ```
 
 这里添加了kotlin对android的扩展，同时也添加了kotlin的gradle插件。
@@ -61,14 +88,32 @@ apply plugin: 'kotlin-android'apply plugin: 'kotlin-android-extensions'ext.anko_
 
 举个例子，如果你想要在Kotlin中使用ArrayList，很简单，Java的ArrayList你可以随意使用，这个感觉跟使用Java没有任何区别，请看：
 
-```
-//实际上就是创建一个ArrayList    val list = arrayListOf(1,2,3,4)    list.add(5)    list.remove(3)    for(item in list){        println(item)    }
+```kotlin
+//实际上就是创建一个ArrayList
+    val list = arrayListOf(1,2,3,4)
+    list.add(5)
+    list.remove(3)
+    for(item in list){
+        println(item)
+    }
 ```
 
 当然，Kotlin标准库也对这些做了扩展，我们在享用Java世界的一切资源的同时，还能比原生Java代码更滋润，真是爽爆有木有：
 
-```
-   val list = arrayListOf(1, 2, 3, 4, 5)    //doubleList = [2,4,6,8,10]    val doubleList = list.map {         it * 2    }    //oddList = [1,3,5]    val oddList = list.filter{        it % 2 == 1    }    //将list挨个打印出来    list.forEach {         println(it)    }
+```kotlin
+ val list = arrayListOf(1, 2, 3, 4, 5)
+    //doubleList = [2,4,6,8,10]
+    val doubleList = list.map { 
+        it * 2
+    }
+    //oddList = [1,3,5]
+    val oddList = list.filter{
+        it % 2 == 1
+    }
+    //将list挨个打印出来
+    list.forEach { 
+        println(it)
+    }
 ```
 
 ## 2.2 与Java交互
@@ -83,20 +128,31 @@ Kotlin的标准库更多的是对Java库的扩展，基于这个设计思路，�
 
 **准备一个Java类**
 
-```
-public class JavaClass {    private int anInt = 0;    public int getAnInt() {        return anInt;    }    public void setAnInt(int anInt) {        this.anInt = anInt;    }}
+```kotlin
+public class JavaClass {
+    private int anInt = 0;
+    public int getAnInt() {
+        return anInt;
+    }
+    public void setAnInt(int anInt) {
+        this.anInt = anInt;
+    }
+}
 ```
 
 **下面是Kotlin代码**
 
-```
-    val javaClass = JavaClass()    javaClass.anInt = 5    print(javaClass.anInt)
+```kotlin
+val javaClass = JavaClass()
+javaClass.anInt = 5
+print(javaClass.anInt)
 ```
 
 所以我们在Android开发时，就可以这样：
 
-```
-view.background = ...textView.text = ...
+```kotlin
+view.background = ...
+textView.text = ...
 ```
 
 反过来在Java中调用Kotlin也毫无压力，官方文档[Calling Kotlin from Java](https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html)对于常见的情况作了比较详细的阐述，这里就不再赘述。
@@ -109,7 +165,7 @@ view.background = ...textView.text = ...
 
 Kotlin提供了一种非常简单的方式来创建这样的数据类，例如：
 
-```
+```kotlin
 data class Coordinate(val x: Double, val y: Double)
 ```
 
@@ -121,25 +177,31 @@ data class Coordinate(val x: Double, val y: Double)
 
 Kotlin的空安全设计，主要是在类型后面加？表示可空，否则就不能为null。
 
-```
-val anInt: Int = null // 错误val anotherInt: Int? = null // 正确
+```kotlin
+val anInt: Int = null // 错误
+val anotherInt: Int? = null // 正确
 ```
 
 使用时，则：
 
-```
-val nullable: Int? = 0val nonNullable: Int = 2nullable.toFloat() // 编译错误nullable?.toFloat() // 如果null，什么都不做，否则调用toFloatnullable!!.toFloat() // 强制转换为非空对象，并调用toFloat；如果nullable为null，抛空指针异常nonNullable.toFloat() // 正确
+```kotlin
+val nullable: Int? = 0
+val nonNullable: Int = 2
+nullable.toFloat() // 编译错误
+nullable?.toFloat() // 如果null，什么都不做，否则调用toFloat
+nullable!!.toFloat() // 强制转换为非空对象，并调用toFloat；如果nullable为null，抛空指针异常
+nonNullable.toFloat() // 正确
 ```
 
 而对于Java代码，比如我们在覆写Activity的onCreate方法时，有个参数savedInstanceState：
 
-```
+```kotlin
 override fun onCreate(savedInstanceState: Bundle!) 
 ```
 
 这表示编译器不再强制savedInstanceState是否可null，开发者在覆写时可以自己决定是否可null。当然，对于本例，onCreate的参数是可能为null的，因此覆写以后的方法应为：
 
-```
+```kotlin
 override fun onCreate(savedInstanceState: Bundle?) 
 ```
 
@@ -147,62 +209,154 @@ override fun onCreate(savedInstanceState: Bundle?)
 
 还是举个例子，我需要在Activity当中创建一个View的引用，通常我们在Java代码中这么写：
 
-```
-public class DemoActivity extends Activity{    private TextView aTextView;    public void onCreate(Bundle savedInstanceState){        super.OnCreate(savedInstanceState);        setContentView(R.layout.main);        aTextView = (TextView) findViewById(R.id.a_textview);        aTextView.setText("Hello");        aTextView.setTextSize(20);        ...    }}
+```kotlin
+public class DemoActivity extends Activity{
+    private TextView aTextView;
+    public void onCreate(Bundle savedInstanceState){
+        super.OnCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        aTextView = (TextView) findViewById(R.id.a_textview);
+        aTextView.setText("Hello");
+        aTextView.setTextSize(20);
+        ...
+    }
+}
 ```
 
 在Kotlin当中呢？
 
-```
-class DemoActivity : Activity(){    private var aTextView: TextView? = null    override fun onCreate(savedInstanceState: Bundle?){        super.onCreate(savedInstanceState)        setContentView(R.layout.main)        //当然有更好用的方式，暂且先这么写        aTextView = findViewById(R.id.a_textview) as TextView        aTextView!!.text = "Hello"        aTextView!!.textSize = 20        ...    }}
+```kotlin
+class DemoActivity : Activity(){
+    private var aTextView: TextView? = null
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+        //当然有更好用的方式，暂且先这么写
+        aTextView = findViewById(R.id.a_textview) as TextView
+        aTextView!!.text = "Hello"
+        aTextView!!.textSize = 20
+        ...
+    }
+}
 ```
 
 每次用aTextView都要加俩!，不然编译器不能确定它究竟是不是null，于是不让你使用。。这尼玛。。。到底是为了方便还是为了麻烦？？
 
 所以后来我又决定这么写：
 
-```
-class DemoActivity : Activity(){    private var aTextView: TextView // 编译错误，必须初始化！！！    ...}
+```kotlin
+class DemoActivity : Activity(){
+    private var aTextView: TextView // 编译错误，必须初始化！！！
+    ...
+}
 ```
 
 这可如何是好？？
 
 其实Kotlin肯定是有办法解决这个问题哒！比如上面的场景，我们这么写就可以咯：
 
-```
-class DemoActivity : Activity(){    private val aTextView: TextView by lazy{        findViewById(R.id.a_textview) as TextView    }    override fun onCreate(savedInstanceState: Bundle?){        super.onCreate(savedInstanceState)        setContentView(R.layout.main)        aTextView.text = "Hello"        aTextView.textSize = 20        ...    }}
+```kotlin
+class DemoActivity : Activity(){
+    private val aTextView: TextView by lazy{
+        findViewById(R.id.a_textview) as TextView
+    }
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+        aTextView.text = "Hello"
+        aTextView.textSize = 20
+        ...
+    }
+}
 ```
 
 lazy是Kotlin的属性代理的一个实例，它提供了延迟加载的机制。换句话说，这里的lazy提供了初始化aTextView的方法，不过真正初始化这个动作发生的时机却是在aTextView第一次被使用时了。lazy默认是线程安全的，你当然也可以关掉这个配置，只需要加个参数即可：
 
-```
-private val aTextView: TextView by lazy(LazyThreadSafetyMode.NONE){     findViewById(R.id.a_textview) as TextView}
+```kotlin
+private val aTextView: TextView by lazy(LazyThreadSafetyMode.NONE){
+     findViewById(R.id.a_textview) as TextView
+}
 ```
 
 好，这时候肯定有人要扔西红柿过来了（再扔点儿鸡蛋呗），你这lazy只能初始化val啊，万一我要定义一个var成语，又需要延迟初始化，关键还不为null，怎么办？？
 
-```
-class Demo {    lateinit var anJsonObject: JsonObject    fun initDemo(){        anJsonObject = JsonObject("{...}")    }}
+```kotlin
+class Demo {
+    lateinit var anJsonObject: JsonObject
+    fun initDemo(){
+        anJsonObject = JsonObject("{...}")
+    }
+}
 ```
 
 lateinit的使用还是有很多限制的，比如只能在不可null的对象上使用，比须为var，不能为primitives（Int、Float之类）等等，不过这样逼迫你一定要初始化这个变量的做法，确实能减少我们在开发中的遗漏，从而提高开发效率。
 
 至于lazy技术，实际上是Delegate Properties的一个应用，也就是属性代理了。在Kotlin当中，声明成员属性，除了直接赋值，还可以用Delegate的方式来声明，这个Delegate需要根据成员的类型（val或者var）来提供相应的getValue和setValue方法，比如一个可读写的Delegate，需要提供下面的方法：
 
-```
-public interface ReadWriteProperty<in R, T> {    /**     * Returns the value of the property for the given object.     * @param thisRef the object for which the value is requested.     * @param property the metadata for the property.     * @return the property value.     */    public operator fun getValue(thisRef: R, property: KProperty<*>): T    /**     * Sets the value of the property for the given object.     * @param thisRef the object for which the value is requested.     * @param property the metadata for the property.     * @param value the value to set.     */    public operator fun setValue(thisRef: R, property: KProperty<*>, value: T)}
+```kotlin
+public interface ReadWriteProperty<in R, T> {
+    /**
+     * Returns the value of the property for the given object.
+     * @param thisRef the object for which the value is requested.
+     * @param property the metadata for the property.
+     * @return the property value.
+     */
+    public operator fun getValue(thisRef: R, property: KProperty<*>): T
+    /**
+     * Sets the value of the property for the given object.
+     * @param thisRef the object for which the value is requested.
+     * @param property the metadata for the property.
+     * @param value the value to set.
+     */
+    public operator fun setValue(thisRef: R, property: KProperty<*>, value: T)
+}
 ```
 
 好嘴皮不如来个栗子，下面我们就看一个自定义Delegate，用来访问SharedPreference：
 
-```
-class Preference<T>(val context: Context, val name: String, val default: T) : ReadWriteProperty<Any?, T> {    val prefs by lazy { context.getSharedPreferences("default", Context.MODE_PRIVATE) }    override fun getValue(thisRef: Any?, property: KProperty<*>): T {        return findPreference(name, default)    }    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {        putPreference(name, value)    }    private fun <U> findPreference(name: String, default: U): U = with(prefs) {        val res: Any = when (default) {            is Long -> getLong(name, default)            is String -> getString(name, default)            is Int -> getInt(name, default)            is Boolean -> getBoolean(name, default)            is Float -> getFloat(name, default)            else -> throw IllegalArgumentException("This type can be saved into Preferences")        }        res as U    }    private fun <U> putPreference(name: String, value: U) = with(prefs.edit()) {        when (value) {            is Long -> putLong(name, value)            is String -> putString(name, value)            is Int -> putInt(name, value)            is Boolean -> putBoolean(name, value)            is Float -> putFloat(name, value)            else -> throw IllegalArgumentException("This type can be saved into Preferences")        }.apply()    }}
+```kotlin
+class Preference<T>(val context: Context, val name: String, val default: T) : ReadWriteProperty<Any?, T> {
+    val prefs by lazy { context.getSharedPreferences("default", Context.MODE_PRIVATE) }
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
+        return findPreference(name, default)
+    }
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        putPreference(name, value)
+    }
+    private fun <U> findPreference(name: String, default: U): U = with(prefs) {
+        val res: Any = when (default) {
+            is Long -> getLong(name, default)
+            is String -> getString(name, default)
+            is Int -> getInt(name, default)
+            is Boolean -> getBoolean(name, default)
+            is Float -> getFloat(name, default)
+            else -> throw IllegalArgumentException("This type can be saved into Preferences")
+        }
+        res as U
+    }
+    private fun <U> putPreference(name: String, value: U) = with(prefs.edit()) {
+        when (value) {
+            is Long -> putLong(name, value)
+            is String -> putString(name, value)
+            is Int -> putInt(name, value)
+            is Boolean -> putBoolean(name, value)
+            is Float -> putFloat(name, value)
+            else -> throw IllegalArgumentException("This type can be saved into Preferences")
+        }.apply()
+    }
+}
 ```
 
 需要说明的是，这段代码是我从《Kotlin for Android Developer》的示例中摘出来的。有了这个Delegate类，我们就可以完全不需要关心SharedPreference了，下面给出使用的示例代码：
 
-```
-class WhateverActivity : Activity(){    var aInt: Int by Preference(this, "aInt", 0)    fun whatever(){        println(aInt)//会从SharedPreference取这个数据        aInt = 9 //会将这个数据写入SharedPreference    }}
+```kotlin
+class WhateverActivity : Activity(){
+    var aInt: Int by Preference(this, "aInt", 0)
+    fun whatever(){
+        println(aInt)//会从SharedPreference取这个数据
+        aInt = 9 //会将这个数据写入SharedPreference
+    }
+}
 ```
 
 于是我们再也不需要重复写那些getSharedPreference，也不用edit、commit，再见那些edit之后忘了commit的日子。有没有觉得非常赞！
@@ -211,14 +365,25 @@ class WhateverActivity : Activity(){    var aInt: Int by Preference(this, "aInt"
 
 扩展类，就是在现有类的基础上，添加一些属性或者方法，当然扩展的这些成员需要导入当前扩展成员所在的包才可以访问到。下面给出一个例子：
 
-```
-data class Coordinate(val x: Double, val y: Double)val Coordinate.theta: Double    get() {        return Math.atan(y/x)    }fun Coordinate.R():Double{    return Math.hypot(x, y)}
+```kotlin
+data class Coordinate(val x: Double, val y: Double)
+val Coordinate.theta: Double
+    get() {
+        return Math.atan(y/x)
+    }
+fun Coordinate.R():Double{
+    return Math.hypot(x, y)
+}
 ```
 
 我们已经介绍过data class，Coordinate有两个成员分别是x和y，我们知道通常表示一个二维平面，有这俩够了；然而我们在图形学当中经常会需要求得其极坐标，所以我们扩展了Coordinate，增加了一个属性theta表示角度（反正切的值域为-π/2 ~ π/2，所以这个式子不适用于二三象限，不过这不是重点了），增加了一个R方法来获得点的半径，于是我们在main方法中就可以这么用：
 
-```
-fun main(args: Array<String>) {    val coord = Coordinate(3.0,4.0)    println(coord.theta)    println(coord.R())}
+```kotlin
+fun main(args: Array<String>) {
+    val coord = Coordinate(3.0,4.0)
+    println(coord.theta)
+    println(coord.R())
+}
 ```
 
 那么这个扩展有什么限制呢？
@@ -232,13 +397,17 @@ fun main(args: Array<String>) {    val coord = Coordinate(3.0,4.0)    println(co
 
 有了Kotlin的这个扩展功能，日子就会好过得多了，下面我创建的一个打日志的方法：
 
-```
-package com.benny.utilsimport android.util.Loginline fun <reified T> T.debug(log: Any){    Log.d(T::class.simpleName, log.toString())}
+```kotlin
+package com.benny.utils
+import android.util.Log
+inline fun <reified T> T.debug(log: Any){
+    Log.d(T::class.simpleName, log.toString())
+}
 ```
 
 有了这个方法，你可以在任何类的方法体中直接写：
 
-```
+```kotlin
 debug(whatever)
 ```
 
@@ -248,14 +417,18 @@ debug(whatever)
 
 为了让大家印象深刻，我下面给出类似功能的Java的代码实现：
 
-```
-public static void debug(Class<?> clazz, Object log){    Log.d(clazz.getSimpleName(), log.toString());}
+```kotlin
+public static void debug(Class<?> clazz, Object log){
+    Log.d(clazz.getSimpleName(), log.toString());
+}
 ```
 
 而你如果说希望在Java中也希望像下面这样拿到这个泛型参数的类型，是不可以的：
 
-```
-public static <T> void debug(Object log){    Log.d(T.getSimpleName(), log.toString());//错误，T是泛型参数，无法直接使用}
+```kotlin
+public static <T> void debug(Object log){
+    Log.d(T.getSimpleName(), log.toString());//错误，T是泛型参数，无法直接使用
+}
 ```
 
 就算我们在调用处会写道 debug < Date >(“blabla”)，但这个Date在编译之后还是会被擦除。
@@ -266,88 +439,161 @@ Java 8已经开始可以支持Lambda表达式了，这种东西对于Java这样�
 
 通常我们需要执行一段异步的代码，我们会构造一个Runnable对象，然后交给executor，比如这段java代码：
 
-```
-executor.submit(new Runnable(){    @Override    public void run(){        //todo    }});
+```kotlin
+executor.submit(new Runnable(){
+    @Override
+    public void run(){
+        //todo
+    }
+});
 ```
 
 用Kotlin怎么写呢？
 
-```
-executor.submit({    //todo})
+```kotlin
+executor.submit({
+    //todo
+})
 ```
 
 一下子省了很多代码。
 
 那么实际当中我们可能更常见到下面的例子，这是一段很常见的Java代码，在Android的UI初始化会见到：
 
-```
-textView.setOnClickListener(new OnClickListener(){    @Override    public void onClick(View view){        //todo    }});handle.post(new Runnable(){    @Override    public void run(){        //todo    }});
+```kotlin
+textView.setOnClickListener(new OnClickListener(){
+    @Override
+    public void onClick(View view){
+        //todo
+    }
+});
+handle.post(new Runnable(){
+    @Override
+    public void run(){
+        //todo
+    }
+});
 ```
 
 那么我们用Kotlin怎么写呢？
 
-```
-textView.setOnClickListener{ /*todo*/ }handler.post{ /*todo*/ }
+```kotlin
+textView.setOnClickListener{ /*todo*/ }
+handler.post{ /*todo*/ }
 ```
 
 在Anko这个Android库的帮助下，我们甚至可以继续简化OnClickListener的设置方式：
 
-```
+```kotlin
 textView.onClick{ /*todo*/ }
 ```
 
 当然，好玩的不止这些，如果结合上一节我们提到的扩展方法，我们就很容易看到Kotlin的标准库提供的类似with和apply这样的方法是怎么工作的了：
 
-```
-public inline fun <T, R> with(receiver: T, block: T.() -> R): R = receiver.block()public inline fun <T> T.apply(block: T.() -> Unit): T { block(); return this }
+```kotlin
+public inline fun <T, R> with(receiver: T, block: T.() -> R): R = receiver.block()
+public inline fun <T> T.apply(block: T.() -> Unit): T { block(); return this }
 ```
 
 我们通常会在某个方法体内创建一个对象并返回它，可我们除了调用它的构造方法之外还需要做一些其他的操作，于是就要创建一个局部变量。。。有了apply这个扩展方法，我们就可以这么写：
 
-```
-fun getStringBuilder: StringBuilder{    return StringBuilder().apply{        append("whatever")    }}
+```kotlin
+fun getStringBuilder: StringBuilder{
+    return StringBuilder().apply{
+        append("whatever")
+    }
+}
 ```
 
 这样返回的StringBuilder对象实际上是包含”whatever”这个字符串的。
 
 至于说Kotlin对于RxJava的友好性，使得我突然有点儿相信缘分这种东西了：
 
-```
-       Observable.create<ArrayList<Dummy>> {            it.onStart()            try {                it.onNext(dummyObjs)            } catch(e: Exception) {                it.onError(e)            } finally {                it.onCompleted()            }        }.subscribe(object : Subscriber<ArrayList<Dummy>>() {            override fun onCompleted() {            }            override fun onNext(t: ArrayList<Dummy>?) {            }            override fun onError(e: Throwable?) {            }        })
+```kotlin
+Observable.create<ArrayList<Dummy>> {
+     it.onStart()
+     try {
+         it.onNext(dummyObjs)
+     } catch(e: Exception) {
+         it.onError(e)
+     } finally {
+         it.onCompleted()
+     }
+ }.subscribe(object : Subscriber<ArrayList<Dummy>>() {
+     override fun onCompleted() {
+     }
+     override fun onNext(t: ArrayList<Dummy>?) {
+     }
+     override fun onError(e: Throwable?) {
+     }
+ })
 ```
 
 ## 3.5 Pattern Matching
 
 记得之前在浏览Scala的特性时，看到：
 
-```
-object HelloScala{  // do something}
+```kotlin
+object HelloScala{  
+	// do something
+}
 ```
 
 觉得很新鲜，这时候有个朋友不屑的说了句，Scala的模式匹配才真正犀利——Kotlin当中也有这样的特性，我们下面就来看个例子：
 
-```
-val x = 7when (x) {  in 1..10 -> print("x is in the range")  in validNumbers -> print("x is valid")  !in 10..20 -> print("x is outside the range")  else -> print("none of the above")}
+```kotlin
+val x = 7
+when (x) {
+  in 1..10 -> print("x is in the range")
+  in validNumbers -> print("x is valid")
+  !in 10..20 -> print("x is outside the range")
+  else -> print("none of the above")
+}
 ```
 
 咋一看感觉when表达式就是一个增强版的switch——Java 7以前的switch实际上支持的类型非常有限，Java 7当中增加的对String的支持也是基于int类型的——我们可以看到when不再像switch那样只匹配一个数值，它的子式可以是各种返回Boolean的表达式。
 
 when表达式还有一种写法更革命：
 
-```
-when {  x.isOdd() -> print("x is odd")  x.isEven() -> print("x is even")  else -> print("x is funny")}
+```kotlin
+when {
+  x.isOdd() -> print("x is odd")
+  x.isEven() -> print("x is even")
+  else -> print("x is funny")
+}
 ```
 
 只要是返回Boolean的表达式就可以作为when的子式，这样when表达式的灵活性可见一斑。当然，与Scala相比，**Kotlin还是要保守一些的，下面给出一个Scala类似的例子，大家感受一下，这实际上也可以体现出Kotlin在增加Java的同时也尽量保持简单的设计哲学**（大家都知道，毕竟Scala需要智商o(╯□╰)o）。
 
-```
-object Hello {  def main(args: Array[String]) {    easyMatch((1, 3))    easyMatch(Array(1,3,4))    easyMatch(Bean(3.0, 4.0))  }  def easyMatch(value : Any) = value match {      case int :Int => {        println("This is an Int.")      }      case (a, b) =>{        println(s"a tuple with : $a , $b")      }      case Bean(x, y)  => {        println(s"$x, $y")    }      case whatever => println(whatever)    }}case class Bean(val x: Double, val y: Double)
+```kotlin
+object Hello {
+  def main(args: Array[String]) {
+    easyMatch((1, 3))
+    easyMatch(Array(1,3,4))
+    easyMatch(Bean(3.0, 4.0))
+  }
+  def easyMatch(value : Any) = value match {
+      case int :Int => {
+        println("This is an Int.")
+      }
+      case (a, b) =>{
+        println(s"a tuple with : $a , $b")
+      }
+      case Bean(x, y)  => {
+        println(s"$x, $y")
+    }
+      case whatever => println(whatever)
+    }
+}
+case class Bean(val x: Double, val y: Double)
 ```
 
 运行结果如下：
 
 ```
-a tuple with : 1 , 3[I@2d5548253.0, 4.0
+a tuple with : 1 , 3
+[I@2d554825
+3.0, 4.0
 ```
 
 ## 3.6 如果你是一个SDK开发者
@@ -364,14 +610,86 @@ Kotlin虽然没有提供对于子包可见的修饰符，不过它提供了inter
 
 其实我们对DSL肯定不会陌生，gradle的脚本就是基于groovy的DSL，而Kotlin的函数特性显然也是可以支持DSL的。比如，我们最终要生成下面的xml数据：
 
-```
-<project version="4">  <component name="Encoding">    <file url="PROJECT" charset="UTF-8" />  </component></project>
+```xml
+<project version="4">
+  <component name="Encoding">
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
 ```
 
 我们可以构建下面的类：
 
-```
-class Project {    var version: String? = null        get() =        if (field == null) ""        else {            " version=\"${field}\""        }    lateinit private var component: Component    fun component(op: Component.() -> Unit) {        component = Component().apply {            op()        }    }    override fun toString(): String {        return "<project${version}>${component}<project>"    }}fun project(op: Project.() -> Unit): Project {    return Project().apply {        op()    }}class Component {    var name: String? = null        get() =        if (field == null) ""        else {            " name=\"${field}\""        }    lateinit private var file: File    fun file(op: File.() -> Unit) {        file = File().apply {            op()        }    }    override fun toString(): String {        return "<component${name}>${file}<component>"    }}class File {    var url: String? = null        get() =        if (field == null) ""        else {            " url=\"${field}\""        }    var charset: String? = null        get() =        if (field == null) ""        else {            " charset=\"${field}\""        }    override fun toString(): String {        return "<file${url}${charset}/>"    }}fun main(args: Array<String>) {    val xml = project {        version = "4"        component {            name = "Encoding"            file {                url = "PROJECT"                charset = "UTF-8"            }        }    }    println(xml)}
+```kotlin
+class Project {
+    var version: String? = null
+        get() =
+        if (field == null) ""
+        else {
+            " version=\"${field}\""
+        }
+    lateinit private var component: Component
+    fun component(op: Component.() -> Unit) {
+        component = Component().apply {
+            op()
+        }
+    }
+    override fun toString(): String {
+        return "<project${version}>${component}<project>"
+    }
+}
+fun project(op: Project.() -> Unit): Project {
+    return Project().apply {
+        op()
+    }
+}
+class Component {
+    var name: String? = null
+        get() =
+        if (field == null) ""
+        else {
+            " name=\"${field}\""
+        }
+    lateinit private var file: File
+    fun file(op: File.() -> Unit) {
+        file = File().apply {
+            op()
+        }
+    }
+    override fun toString(): String {
+        return "<component${name}>${file}<component>"
+    }
+}
+class File {
+    var url: String? = null
+        get() =
+        if (field == null) ""
+        else {
+            " url=\"${field}\""
+        }
+    var charset: String? = null
+        get() =
+        if (field == null) ""
+        else {
+            " charset=\"${field}\""
+        }
+    override fun toString(): String {
+        return "<file${url}${charset}/>"
+    }
+}
+fun main(args: Array<String>) {
+    val xml = project {
+        version = "4"
+        component {
+            name = "Encoding"
+            file {
+                url = "PROJECT"
+                charset = "UTF-8"
+            }
+        }
+    }
+    println(xml)
+}
 ```
 
 我们看到在main方法当中，我们用kotlin定义的dsl写出了一个Project对象，它有这与xml描述的一致的结构和含义，如果你愿意，可以构造相应的方法来输出这样的xml，运行之后的结果：
@@ -386,7 +704,7 @@ class Project {    var version: String? = null        get() =        if (field =
 
 写了很多代码，却发现它们干不了多少事情，终究还是会苦恼的。比如我一直比较痛苦的一件事儿就是：
 
-```
+```kotlin
 Button button = (Button) findViewById(R.id.btn);
 ```
 
@@ -398,19 +716,58 @@ Button button = (Button) findViewById(R.id.btn);
 
 **main.xml**
 
-```
-<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"                android:layout_width="match_parent"                android:layout_height="match_parent"                android:background="@drawable/open_bj"                android:orientation="vertical">        <TextView            android:id="@+id/textView"                    android:text="Hello"            android:textSize="50sp"            android:layout_width="wrap_content"            android:layout_height="wrap_content"/>        <Button            android:id="@+id/start"            android:clickable="false"            android:layout_gravity="center_horizontal"            android:background="@drawable/start_selector"            android:textSize="50sp"            android:layout_marginTop="20dp"            android:layout_marginBottom="200dp"            android:layout_width="wrap_content"            android:layout_height="wrap_content"/></RelativeLayout>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/open_bj"
+                android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"        
+            android:text="Hello"
+            android:textSize="50sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/start"
+            android:clickable="false"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/start_selector"
+            android:textSize="50sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>
 ```
 
 在Activity中：
 
-```
-package com.benny……import kotlinx.android.synthetic.main.load_activity.*import org.jetbrains.anko.onClickimport org.jetbrains.anko.startActivityimport org.jetbrains.anko.toast……class LoadActivity : Activity() {    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.main)        start.onClick {            toast("开始")            startActivity<AnotherActivity>()        }        textView.text = "你好"    }}
+```kotlin
+package com.benny
+……
+import kotlinx.android.synthetic.main.load_activity.*
+import org.jetbrains.anko.onClick
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+……
+class LoadActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+        start.onClick {
+            toast("开始")
+            startActivity<AnotherActivity>()
+        }
+        textView.text = "你好"
+    }
+}
 ```
 
 注意到：
 
-```
+```kotlin
 import kotlinx.android.synthetic.main.load_activity.*
 ```
 
@@ -422,28 +779,62 @@ import kotlinx.android.synthetic.main.load_activity.*
 
 原来在java当中，我们这么写：
 
-```
-handler.post(new Runnable(){    @Override    public void run(){        //todo      }});MainActivity.this.runOnUiThread(    public void run(){        //todo    }});
+```kotlin
+handler.post(new Runnable(){
+    @Override
+    public void run(){
+        //todo  
+    }
+});
+MainActivity.this.runOnUiThread(
+    public void run(){
+        //todo
+    }
+});
 ```
 
 而在Kotlin当中呢，我们只需要这么写：
 
-```
-async() {    //do something asynchronously    uiThread {        //do something on UI thread    }}
+```kotlin
+async() {
+    //do something asynchronously
+    uiThread {
+        //do something on UI thread
+    }
+}
 ```
 
 自己感受一下吧。
 
 下面我们再来提一个有意思的东西，我们从做Android开发一开始就要编写xml，印象中这个对于我来说真的是一件痛苦的事情，因为它的工作机制并不如代码那样直接（以至于我现在很多时候居然喜欢用Java代码直接写布局）——当然，最主要的问题并不是这个，而是解析xml需要耗费CPU。Kotlin有办法可以解决这个问题，那就是DSL了。下面给出一个例子：
 
-```
-linearLayout {    button("Login") {        textSize = 26f    }.lparams(width = wrapContent) {        horizontalMargin = dip(5)        topMargin = dip(10)    }}
+```kotlin
+linearLayout {
+    button("Login") {
+        textSize = 26f
+    }.lparams(width = wrapContent) {
+        horizontalMargin = dip(5)
+        topMargin = dip(10)
+    }
+}
 ```
 
 一个LinearLayout包含了一个Button，这段代码你可以直接写到你的代码中灵活复用，就像这样：
 
-```
-    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(linearLayout {            button("This is a button") {                onClick {                    toast("clicked!")                }            }.lparams {                width = matchParent                verticalMargin = dip(5)            }        })    }
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(linearLayout {
+        button("This is a button") {
+            onClick {
+                toast("clicked!")
+            }
+        }.lparams {
+            width = matchParent
+            verticalMargin = dip(5)
+        }
+    })
+}
 ```
 
 这样做的好处真是不少：
@@ -465,8 +856,9 @@ linearLayout {    button("Login") {        textSize = 26f    }.lparams(width = w
 
 目前Kotlin 1.0已经release，尽管像0xffffffff识别成Long类型这样的bug仍然没有解[详情](https://youtrack.jetbrains.com/issue/KT-4749)：
 
-```
-val int: Int = 0xffffffff // errorval anotherInt: Int = 0xffffffff.toInt() // correct
+```kotlin
+val int: Int = 0xffffffff // error
+val anotherInt: Int = 0xffffffff.toInt() // correct
 ```
 
 不过，Kotlin的教学资源和社区建设也已经相对成熟，按照官方的说法，Kotlin可以作为生产工具投入开发，详情可以参考：[Kotlin 1.0 Released: Pragmatic Language for JVM and Android](http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/)。
