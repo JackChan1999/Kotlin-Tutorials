@@ -120,7 +120,7 @@ $JAVA_HOME/java -Dfile.encoding=UTF-8 -classpath "$INTELLIJ_HOME/Kotlin/kotlinc/
 
 原来，IntelliJ 运行 kts 用到的命令，在 kotlinc 当中也是一样一样的，嗯哈，这就有意思了，我们运行一段脚本的程序入口原来在 K2JVMCompiler 当中，那我们不妨找着它的源码一看究竟~
 
-*K2JVMCompiler 在 Kotlin 源码的 compiler/cli 模块下。*
+K2JVMCompiler 在 Kotlin 源码的 compiler/cli 模块下。
 
 它的入口方法倒也直接了当，
 
@@ -140,9 +140,9 @@ $JAVA_HOME/java -Dfile.encoding=UTF-8 -classpath "$INTELLIJ_HOME/Kotlin/kotlinc/
 
 >**“元芳，你怎么看？”**
 >
->“大人所言极是呀！只是小可有一事不明。。。”
+>“大人所言极是呀！只是小可有一事不明...”
 >
->**“你哪儿来那么多事儿。。”**
+>**“你哪儿来那么多事儿...”**
 
 好，猜测完毕，开始查案~
 
@@ -211,4 +211,4 @@ Class 'xxx' is compiled by a pre-release version of Kotlin and cannot be loaded 
 
 其实前面这段分析本身没有什么难度，它最有价值的地方在于它为我们提供了一个方便快捷了解 Kotlin 内部运行机制的入口，哪里不会断哪里，妈妈再也不用担心我的 Kotlin~
 
-<center>![](../../arts/kotlin扫码关注.png)</center>
+![](../assets/kotlin扫码关注.png)

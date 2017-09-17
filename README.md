@@ -8,6 +8,7 @@
     * [你为什么需要 Kotlin](关于Kotlin/你为什么需要 Kotlin.md)
     * [为什么我要改用Kotlin](关于Kotlin/为什么我要改用Kotlin.md)
     * [如何看待 Kotlin 成为 Android 官方支持开发语言？](关于Kotlin/如何看待 Kotlin 成为 Android 官方支持开发语言？.md)
+    * [Kotlin Script 介绍](关于Kotlin/Kotlin Script 介绍.md)
 * [面向对象](面向对象/README.md)
     * [Kotlin 的类特性(上)](面向对象/Kotlin 的类特性_上.md)
     * [Kotlin 的类特性(下)](面向对象/Kotlin 的类特性_下.md)

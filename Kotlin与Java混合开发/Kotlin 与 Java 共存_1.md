@@ -1,4 +1,4 @@
-# Kt14 Kotlin 与 Java 共存(一)
+# Kotlin 与 Java 共存(一)
 
 大家好，经过前面的课程，相信大家对 Kotlin 已经有了一个初步的认识，那么我们在项目中究竟应该怎么应用 Kotlin 呢？
 
@@ -18,7 +18,7 @@
 
 正所谓兵来将挡水来土掩，有多少差异，就要有多少对策，这一期我们先讲**在 Java 中调用 Kotlin**
 
-##1 属性
+##1. 属性
 我们在 Kotlin 中编写了一个类，当中有一个属性：
 
 ``` kotlin
@@ -88,7 +88,7 @@ fun setAge(value: Int){
 
 仔细想想，这实在是多此一举了。
 
-##2 object
+##2. object
 我们知道在 Kotlin 当中最简单的单例就是 object 了，可是 Java 并没有这样的特性。那我们要怎么访问 object 呢？
 
 ```kotlin
@@ -112,7 +112,7 @@ Singleton.INSTANCE.printHello();
 
 ```
 
-##3 默认参数的方法
+##3. 默认参数的方法
 
 Kotlin 的方法可以有默认参数，这样可以省掉很多方法的重载（我们把重写继承自父类的方法叫做覆写 override，名字相同参数不同的方法叫做重载 overload），可 Java 是没有这个特性的。Kotlin 的默认参数通常在 Java 当中是被忽略掉的，例如我们定义这样一个 Kotlin 类：
 
@@ -158,7 +158,7 @@ fun overloaded(a: Int)
 
 这样的话，我们在 Java 中也可以愉快地使用默认参数带来的便利了。
 
-##4 包方法
+##4. 包方法
 
 Java 没有包方法，如果有的话，倒也没那么多事儿了。 Kotlin 的包方法会被**默认**编译到一个名为：包名+KT 的类当中，比如：
 
@@ -202,7 +202,7 @@ public class CallPackageMethod {
 }
 ```
 
-## 5 扩展方法
+## 5. 扩展方法
 
 扩展方法实际上更像是一种语法糖，本质上其实是第一个参数为扩展类的实例而已。比如我们为 String 写了一个扩展方法：
 
@@ -225,7 +225,7 @@ public class CallExtenstionMethod {
 ```
 
 
-## 6 Internal 的类和成员
+## 6. Internal 的类和成员
 
 我在之前的视频当中一直没有提到过的一个点：Kotlin 其实对访问权限做了调整。除了把默认访问权限改为 public 之外，还提供了一个模块内可见的 internal。一旦某个成员或者类被标记为 internal，那么模块之外的类是无法访问到这个成员或者类的，而对于模块内的其他成员或者类来说，它们则相当于 public —— 这个特性对于 sdk 开发者来说是相当友好的，举个例子，Android 源码中经常会有被标注为 @Hide 的成员，这些成员在 android.jar 当中不会有，不过他们却存在于 framework 的源码中，如果 Java 有 internal 这样的访问控制能力，那么 Android SDK 的开发者大可不必费尽周折搞出个 @Hide 注解并在打包 android.jar 的时候去掉这些成员。
 
@@ -259,11 +259,11 @@ internal class InternalClass {
     }
 }
 ```
-结果我们发现，Java 代码无论在模块内还是模块外，都无法访问到 printHello 方法（尽管编译器提示有个叫 printHello$production_sources_for_module_Kt14_Kt14_main
+结果我们发现，Java 代码无论在模块内还是模块外，都无法访问到 printHello 方法（尽管编译器提示有个叫 `printHello$production_sources_for_module_Kt14_Kt14_main`
 ，字节码当中也确实有这个方法，不过我们还是无法编译通过。
 
 **结论就是，internal 修饰符与 Java 的兼容性方法比较差，如果你的项目中有 Java 代码依赖 Kotlin 代码，那么被依赖的部分需要慎用 internal。**
 
-## 7 小结
+## 7. 小结
 
 总体来讲，Java 依赖 Kotlin 的代码并不是件难事，绝大多数的场景我们并不会觉得二者混用在一起会有什么不舒服，相反，时间久了，你甚至会觉察不到二者的共存。这一期视频就到这里，下一期，我们讲如何在 Kotlin 当中调用 Java，谢谢大家。

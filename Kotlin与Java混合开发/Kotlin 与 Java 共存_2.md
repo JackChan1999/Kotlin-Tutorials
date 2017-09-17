@@ -1,8 +1,8 @@
-# Kt15 Kotlin 与 Java 共存(二)
+# Kotlin 与 Java 共存(二)
 
 上一期我们简单讨论了几个 Java 调用 Kotlin 的场景，这一期我们主要讨论相反的情况。
 
-## 1 属性
+## 1. 属性
 
 如果 Java 类存在类似 setXXX 和 getXXX 的方法，Kotlin 会聪明地把他们当做属性来使用，例如：
 
@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 2 空安全
+## 2. 空安全
 
 空安全这个特性使得 Kotlin 对变量的值要求更严格了，由于 Java 变量通常没有这样的信息，因此 Kotlin 在访问 Java 变量或者 Java 方法时，变量、方法的参数和返回值的空与否由我们自己决定，编译器不再进行约束。例如定义这么一个 Java 类：
 
@@ -107,7 +107,7 @@ public abstract class NullSafetyAbsClass {
 }
 ```
 
-## 3 泛型
+## 3. 泛型
 
 整体上来讲，Kotlin 的泛型与 Java 的没什么大的差别，Java 的 ? 在 Kotlin 中变成了 *，毕竟 ? 在 Kotlin 当中用处大着呢。另外，Java 泛型的上限下限的表示法在 Kotlin 当中变成了 out 和 in。
 
@@ -162,7 +162,7 @@ class MyPresenter: Presenter<MyView>()
 
 
 
-## 4 Synchronized 和 volatile
+## 4. Synchronized 和 volatile
 
 在 Kotlin 当中，这两个关键字被削去了王位，成为平民。也许是设计者们觉得这二位作为关键字出现有点儿太重了，虽然不再身居要职，不过却也是不可或缺。
 
@@ -209,7 +209,7 @@ volatile 的命运差不多，也变成了一个注解：
 @Volatile var num: Int = 0
 ```
 
-## 5 SAM 转换
+## 5. SAM 转换
 看名字一头雾水，其实就是对于只有一个方法的 Java 接口，Kotlin 可以用一个 Lambda 表达式来简化它的书写，例如：
 
 ```kotlin
@@ -271,7 +271,7 @@ after remove: net.println.kt15.SAMConversionKt$sam$Runnable$9855366b@4c873330, o
 ```
 每次 Java 的 add 和 remove 方法收到的都是不同的实例，所以 remove 方法根本没有起到作用。
 
-## 6 小结
+## 6. 小结
 
 除了这些之外还有一些细节，比如异常的捕获，集合类型的映射等等，大家可以自行参考官方文档即可。在了解了这些之后，你就可以放心大胆的在你的项目中慢慢渗透 Kotlin，让你的代码逐渐走向简洁与精致了。
 
