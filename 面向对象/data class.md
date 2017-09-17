@@ -1,4 +1,4 @@
-dataclass数据类
+data class数据类
 
 - toString()
 - hashCode()
