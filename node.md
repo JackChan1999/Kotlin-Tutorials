@@ -98,9 +98,68 @@ fun main(args: Array<String>) {
 
 ## 协程
 
-挂起，不是阻塞，suspend，coroutine框架
+协程提供了一种避免阻塞线程并用更廉价、更可控的操作替代线程阻塞的方法：协程挂起。
 
-挂起函数suspend 
+Coroutine是编译器级的，Process和Thread是操作系统级的。
+
+@RestrictsSuspension 注解
+
+buildSequence()
+
+kotlinx.coroutines 框架
+
+### 挂起函数
+
+挂起 suspend，非阻塞
+
+挂起函数suspend，挂起函数不能在普通函数中调用，必须在协程上下文中调用
+
+### CoroutineContext
+
+协程上下文，就是代码块执行在哪个场景。
+
+- AbstractCoroutineContextElement
+
+### ContinuationInterceptor
+
+- interceptContinuation()
+
+### Continuation
+
+挂起的协程可以作为保持其挂起状态与局部变量的对象来存储和传递。这种对象的类型是 `Continuation`
+
+| 方法声明                  | 功能描述                |
+| --------------------- | ------------------- |
+| context               | CoroutineContext上下文 |
+| resume()              |                     |
+| resumeWithException() |                     |
+
+协程的基本操作
+
+| 方法声明                         | 功能描述 |
+| ---------------------------- | ---- |
+| createCoroutine()            | 创建协程 |
+| startCoroutine(Continuation) | 开始协程 |
+| suspendCoroutine()           | 挂起协程 |
+
+### 生成器 
+
+| 方法声明            | 功能描述 |
+| --------------- | ---- |
+| buildSequence() |      |
+| buildIterator() |      |
+|                 |      |
+
+### 状态机
+
+对具有逻辑顺序或时序规律事件的一种描述方法。
+
+- 有限状态机
+- 两种状态机：Moore型和Mealy型
+
+状态机的主要用途
+
+- ​
 
 ## 混合开发
 
