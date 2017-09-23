@@ -1,442 +1,6 @@
-### 5.3.10 生产操作符
+## Map
 
-#### `zip(other: Iterable<R>): List<Pair<T, R>>`
-
-两个集合按照下标配对，组合成的每个Pair作为新的List集合中的元素，并返回。
-
-如果两个集合长度不一样，取短的长度。
-
-代码示例
-
-```
->>> val list1 = listOf(1,2,3)
->>> val list2 = listOf(4,5,6,7)
->>> val list3 = listOf("x","y","z")
->>> list1.zip(list3)
-[(1, x), (2, y), (3, z)]
->>> list3.zip(list1)
-[(x, 1), (y, 2), (z, 3)]
->>> list2.zip(list3)
-[(4, x), (5, y), (6, z)]  // 取短的长度
->>> list3.zip(list2)
-[(x, 4), (y, 5), (z, 6)]
->>> list1.zip(listOf<Int>())
-[]
-```
-
-这个zip函数的定义如下：
-
-```
-public infix fun <T, R> Iterable<T>.zip(other: Iterable<R>): List<Pair<T, R>> {
-    return zip(other) { t1, t2 -> t1 to t2 }
-}
-```
-
-我们可以看出，其内部是调用了`zip(other) { t1, t2 -> t1 to t2 }`。这个函数定义如下：
-
-```
-public inline fun <T, R, V> Iterable<T>.zip(other: Iterable<R>, transform: (a: T, b: R) -> V): List<V> {
-    val first = iterator()
-    val second = other.iterator()
-    val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
-    while (first.hasNext() && second.hasNext()) {
-        list.add(transform(first.next(), second.next()))
-    }
-    return list
-}
-```
-
-依次取两个集合相同索引的元素，使用提供的转换函数transform得到映射之后的值，作为元素组成一个新的List，并返回该List。列表的长度取两个集合中最短的。
-
-代码示例
-
-```
->>> val list1 = listOf(1,2,3)
->>> val list2 = listOf(4,5,6,7)
->>> val list3 = listOf("x","y","z")
->>> list1.zip(list3, {t1,t2 -> t2+t1})
-[x1, y2, z3]
->>> list1.zip(list2, {t1,t2 -> t1*t2})
-[4, 10, 18]
-```
-
-#### `unzip(): Pair<List<T>, List<R>>`
-
-首先这个函数作用在元素是Pair的集合类上。依次取各个Pair元素的first, second值，分别放到List<T>、List<R>中，然后返回一个first为List<T>，second为List<R>的大的Pair。
-
-函数定义
-
-```
-public fun <T, R> Iterable<Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
-    val expectedSize = collectionSizeOrDefault(10)
-    val listT = ArrayList<T>(expectedSize)
-    val listR = ArrayList<R>(expectedSize)
-    for (pair in this) {
-        listT.add(pair.first)
-        listR.add(pair.second)
-    }
-    return listT to listR
-}
-```
-
-看到这里，仍然有点抽象，我们直接看代码示例：
-
-```
->>> val listPair = listOf(Pair(1,2),Pair(3,4),Pair(5,6))
->>> listPair
-[(1, 2), (3, 4), (5, 6)]
->>> listPair.unzip()
-([1, 3, 5], [2, 4, 6])
-```
-
-#### `partition(predicate: (T) -> Boolean): Pair<List<T>, List<T>>`
-
-根据判断条件是否成立，将集合拆分成两个子集合组成的 Pair。我们可以直接看函数的定义来更加清晰的理解这个函数的功能：
-
-```
-public inline fun <T> Iterable<T>.partition(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
-    val first = ArrayList<T>()
-    val second = ArrayList<T>()
-    for (element in this) {
-        if (predicate(element)) {
-            first.add(element)
-        } else {
-            second.add(element)
-        }
-    }
-    return Pair(first, second)
-}
-```
-
-我们可以看出，这是一个内联函数。
-
-代码示例
-
-```
->>> val list = listOf(1,2,3,4,5,6,7,8,9)
->>> list
-[1, 2, 3, 4, 5, 6, 7, 8, 9]
->>> list.partition({it>5})
-([6, 7, 8, 9], [1, 2, 3, 4, 5])
-```
-
-#### `plus(elements: Iterable<T>): List<T>`
-
-合并两个List。
-
-函数定义
-
-```
-public operator fun <T> Iterable<T>.plus(elements: Iterable<T>): List<T> {
-    if (this is Collection) return this.plus(elements)
-    val result = ArrayList<T>()
-    result.addAll(this)
-    result.addAll(elements)
-    return result
-}
-```
-
-我们可以看出，这是一个操作符函数。可以用”+”替代 。
-
-代码示例
-
-```
->>> val list1 = listOf(1,2,3)
->>> val list2 = listOf(4,5)
->>> list1.plus(list2)
-[1, 2, 3, 4, 5]
->>> list1+list2
-[1, 2, 3, 4, 5]
-```
-
-关于plus函数还有以下的重载函数：
-
-```
-plus(element: T): List<T>
-plus(elements: Array<out T>): List<T>
-plus(elements: Sequence<T>): List<T>
-```
-
-等。
-
-#### `plusElement(element: T): List<T>`
-
-在集合中添加一个元素。
-函数定义
-
-```
-@kotlin.internal.InlineOnly
-public inline fun <T> Iterable<T>.plusElement(element: T): List<T> {
-    return plus(element)
-}
-```
-
-我们可以看出，这个函数内部是直接调用的`plus(element: T): List<T>`。
-
-代码示例
-
-```
->>> list1 + 10
-[1, 2, 3, 10]
->>> list1.plusElement(10)
-[1, 2, 3, 10]
->>> list1.plus(10)
-[1, 2, 3, 10]
-```
-
-## 5.4 Set
-
-类似的，Kotlin中的Set也分为：不可变Set和支持增加和删除的可变MutableSet。
-
-不可变Set同样是继承了Collection。MutableSet接口继承于Set, MutableCollection，同时对Set进行扩展，添加了对元素添加和删除等操作。
-
-Set的类图结构如下：
-
-![img](https://segmentfault.com/img/remote/1460000010313211)
-
-### 5.4.1 空集
-
-万物生于无。我们先来看下Kotlin中的空集：
-
-```
-internal object EmptySet : Set<Nothing>, Serializable {
-    private const val serialVersionUID: Long = 3406603774387020532
-
-    override fun equals(other: Any?): Boolean = other is Set<*> && other.isEmpty()
-    override fun hashCode(): Int = 0
-    override fun toString(): String = "[]"
-
-    override val size: Int get() = 0
-    override fun isEmpty(): Boolean = true
-    override fun contains(element: Nothing): Boolean = false
-    override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()
-
-    override fun iterator(): Iterator<Nothing> = EmptyIterator
-
-    private fun readResolve(): Any = EmptySet
-}
-```
-
-空集继承了Serializable，表明是可被序列化的。它的size是0， isEmpty()返回true，hashCode()也是0。
-
-下面是创建一个空集的代码示例：
-
-```
->>> val emptySet = emptySet<Int>()
->>> emptySet
-[]
->>> emptySet.size
-0
->>> emptySet.isEmpty()
-true
->>> emptySet.hashCode()
-0
-```
-
-### 5.4.2 创建Set
-
-#### `setOf`
-
-首先，Set中的元素是不可重复的（任意两个元素 x, y 都不相等）。这里的元素 x, y 不相等的意思是：
-
-```
-x.hashCode() != y.hashCode() 
-!x.equals(y) 
-
-```
-
-上面两个表达式值都为true 。
-
-代码示例
-
-```
->>> val list = listOf(1,1,2,3,3)
->>> list
-[1, 1, 2, 3, 3]
->>> val set = setOf(1,1,2,3,3)
->>> set
-[1, 2, 3]
-```
-
-Kotlin跟Java一样的，判断两个对象的是否重复标准是hashCode()和equals()两个参考值，也就是说只有两个对象的hashCode值一样与equals()为真时，才认为是相同的对象。所以自定义的类必须要要重写hashCode()和equals()两个函数。作为Java程序员，这里一般都会注意到。
-
-创建多个元素的Set使用的函数是
-
-```
-setOf(vararg elements: T): Set<T> = if (elements.size > 0) elements.toSet() else emptySet()
-```
-
-这个toSet()函数是Array类的扩展函数，定义如下
-
-```
-public fun <T> Array<out T>.toSet(): Set<T> {
-    return when (size) {
-        0 -> emptySet()
-        1 -> setOf(this[0])
-        else -> toCollection(LinkedHashSet<T>(mapCapacity(size)))
-    }
-}
-```
-
-我们可以看出，setOf函数背后实际上用的是LinkedHashSet构造函数。关于创建Set的初始容量的算法是：
-
-```
-@PublishedApi
-internal fun mapCapacity(expectedSize: Int): Int {
-    if (expectedSize < 3) {
-        return expectedSize + 1
-    }
-    if (expectedSize < INT_MAX_POWER_OF_TWO) {
-        return expectedSize + expectedSize / 3
-    }
-    return Int.MAX_VALUE // 2147483647， any large value
-}
-```
-
-也就是说，当元素个数n小于3，初始容量为n+1;
-当元素个数n小于`2147483647 / 2 + 1` , 初始容量为 `n + n/3`;
-否则，初始容量为`2147483647`。
-
-如果我们想对一个List去重，可以直接使用下面的方式
-
-```
->>> list.toSet()
-[1, 2, 3]
-```
-
-上文我们使用`emptySet<Int>()`来创建空集，我们也可以使用setOf()来创建空集：
-
-```
->>> val s = setOf<Int>()
->>> s
-[]
-```
-
-创建1个元素的Set：
-
-```
->>> val s = setOf<Int>(1)
->>> s
-[1]
-```
-
-这个函数调用的是`setOf(element: T): Set<T> = java.util.Collections.singleton(element)`, 也是Java的Collections类里的方法。
-
-#### `mutableSetOf(): MutableSet<T>`
-
-创建一个可变Set。
-
-函数定义
-
-```
-@SinceKotlin("1.1")
-@kotlin.internal.InlineOnly
-public inline fun <T> mutableSetOf(): MutableSet<T> = LinkedHashSet()
-```
-
-这个`LinkedHashSet()`构造函数背后实际上是`java.util.LinkedHashSet<E>`， 这就是Kotlin中的类型别名。
-
-### 5.4.3 使用Java中的Set类
-
-包kotlin.collections下面的TypeAliases.kt类中，有一些类型别名的定义如下：
-
-```
-@file:kotlin.jvm.JvmVersion
-
-package kotlin.collections
-
-@SinceKotlin("1.1") public typealias RandomAccess = java.util.RandomAccess
-
-
-@SinceKotlin("1.1") public typealias ArrayList<E> = java.util.ArrayList<E>
-@SinceKotlin("1.1") public typealias LinkedHashMap<K, V> = java.util.LinkedHashMap<K, V>
-@SinceKotlin("1.1") public typealias HashMap<K, V> = java.util.HashMap<K, V>
-@SinceKotlin("1.1") public typealias LinkedHashSet<E> = java.util.LinkedHashSet<E>
-@SinceKotlin("1.1") public typealias HashSet<E> = java.util.HashSet<E>
-
-
-// also @SinceKotlin("1.1")
-internal typealias SortedSet<E> = java.util.SortedSet<E>
-internal typealias TreeSet<E> = java.util.TreeSet<E>
-```
-
-从这里，我们可以看出，Kotlin中的`LinkedHashSet` , `HashSet`, `SortedSet`, `TreeSet` 就是直接使用的Java中的对应的集合类。
-
-对应的创建的方法是
-
-```
-hashSetOf
-linkedSetOf
-mutableSetOf
-sortedSetOf
-```
-
-代码示例如下：
-
-```
->>> val hs = hashSetOf(1,3,2,7)
->>> hs
-[1, 2, 3, 7]
->>> hs::class
-class java.util.HashSet
->>> val ls = linkedSetOf(1,3,2,7)
->>> ls
-[1, 3, 2, 7]
->>> ls::class
-class java.util.LinkedHashSet
->>> val ms = mutableSetOf(1,3,2,7)
->>> ms
-[1, 3, 2, 7]
->>> ms::class
-class java.util.LinkedHashSet
->>> val ss = sortedSetOf(1,3,2,7)
->>> ss
-[1, 2, 3, 7]
->>> ss::class
-class java.util.TreeSet
-```
-
-我们知道在Java中，Set接口有两个主要的实现类HashSet和TreeSet：
-
-HashSet : 该类按照哈希算法来存取集合中的对象，存取速度较快。
-TreeSet : 该类实现了SortedSet接口，能够对集合中的对象进行排序。
-LinkedHashSet：具有HashSet的查询速度，且内部使用链表维护元素的顺序，在对Set元素进行频繁插入、删除的场景中使用。
-
-Kotlin并没有单独去实现一套HashSet、TreeSet和LinkedHashSet。如果我们在实际开发过程中，需要用到这些Set, 就可以直接用上面的方法。
-
-### 5.4.4 Set元素的加减操作 `plus` `minus`
-
-Kotlin中针对Set做了一些加减运算的扩展函数, 例如：
-
-```
-operator fun <T> Set<T>.plus(element: T)
-plusElement(element: T)
-plus(elements: Iterable<T>)
-operator fun <T> Set<T>.minus(element: T)
-minusElement(element: T)
-minus(elements: Iterable<T>)
-```
-
-代码示例：
-
-```
->>> val ms = mutableSetOf(1,3,2,7)
->>> ms+10
-[1, 3, 2, 7, 10]
->>> ms-1
-[3, 2, 7]
->>> 
->>> ms + listOf(8,9)
-[1, 3, 2, 7, 8, 9]
->>> ms - listOf(8,9)
-[1, 3, 2, 7]
->>> ms - listOf(1,3)
-[2, 7]
-```
-
-## 5.5 Map
-
-### 5.5.1 Map概述
+### Map概述
 
 Map是一种把键对象Key和值对象Value映射的集合，它的每一个元素都包含一对键对象和值对象（K-V Pair）。 Key可以看成是Value 的索引，作为key的对象在集合中不可重复（uniq）。
 
@@ -452,7 +16,7 @@ Map没有继承于Collection接口。其类图结构如下：
 
 其中，`Entry<out K, out V>`中保存的是Map的键值对。
 
-### 5.5.2 创建Map
+### 创建Map
 
 跟Java相比不同的是，在Kotlin中的Map区分了只读的Map和可编辑的Map（MutableMap、HashMap、LinkedHashMap）。
 
@@ -484,7 +48,7 @@ HashMap是基于哈希表（hash table）的 Map 接口的实现，以key-value�
 
 创建一个只读空Map。
 
-```
+```kotlin
 >>> val map1 = mapOf<String, Int>()
 >>> map1.size
 0
@@ -494,7 +58,7 @@ true
 
 我们还可以用另外一个函数创建空Map：
 
-```
+```kotlin
 >>> val map2 = emptyMap<String, Int>()
 >>> map2.size
 0
@@ -504,14 +68,14 @@ true
 
 空Map都是相等的：
 
-```
+```kotlin
 >>> map2==map1
 true
 ```
 
 这个空Map是只读的，其属性和函数返回都是预定义好的。其代码如下：
 
-```
+```kotlin
 private object EmptyMap : Map<Any?, Nothing>, Serializable {
     private const val serialVersionUID: Long = 8246714829545688274
 
@@ -537,7 +101,7 @@ private object EmptyMap : Map<Any?, Nothing>, Serializable {
 
 使用二元组Pair创建一个只读Map。
 
-```
+```kotlin
 >>> val map = mapOf(1 to "x", 2 to "y", 3 to "z")
 >>> map
 {1=x, 2=y, 3=z}
@@ -559,7 +123,7 @@ pairs.toMap(LinkedHashMap(mapCapacity(pairs.size)))
 
 如果我们想编辑这个Map， 编译器会直接报错
 
-```
+```kotlin
 >>> map[1]="a"
 error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
 @InlineOnly public operator inline fun <K, V> MutableMap<Int, String>.set(key: Int, value: String): Unit defined in kotlin.collections
@@ -577,7 +141,7 @@ map[1]="a"
 
 创建一个空的可变的Map。
 
-```
+```kotlin
 >>> val map = mutableMapOf<Int, Any?>()
 >>> map.isEmpty()
 true
@@ -593,7 +157,7 @@ true
 
 创建一个可编辑的MutableMap对象。
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "x", 2 to "y", 3 to "z")
 >>> map
 {1=x, 2=y, 3=z}
@@ -604,7 +168,7 @@ true
 
 另外，如果Map中有重复的key键，后面的会直接覆盖掉前面的：
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "x", 2 to "y", 1 to "z")
 >>> map
 {1=z, 2=y}
@@ -616,7 +180,7 @@ true
 
 创建HashMap对象。Kotlin直接使用的是Java的HashMap。
 
-```
+```kotlin
 >>> val map: HashMap<Int, String> = hashMapOf(1 to "x", 2 to "y", 3 to "z")
 >>> map
 {1=x, 2=y, 3=z}
@@ -626,7 +190,7 @@ true
 
 创建空对象LinkedHashMap。直接使用的是Java中的LinkedHashMap。
 
-```
+```kotlin
 >>> val map: LinkedHashMap<Int, String> = linkedMapOf()
 >>> map
 {}
@@ -639,7 +203,7 @@ true
 
 创建带二元组Pair元素的LinkedHashMap对象。直接使用的是Java中的LinkedHashMap。
 
-```
+```kotlin
 >>> val map: LinkedHashMap<Int, String> = linkedMapOf(1 to "x", 2 to "y", 3 to "z")
 >>> map
 {1=x, 2=y, 3=z}
@@ -652,25 +216,25 @@ true
 
 创建一个根据Key升序排序好的TreeMap。对应的是使用Java中的SortedMap。
 
-```
+```kotlin
 >>> val map = sortedMapOf(Pair("c", 3), Pair("b", 2), Pair("d", 1))
 >>> map
 {b=2, c=3, d=1}
 ```
 
-### 5.5.3 访问Map的元素
+### 访问Map的元素
 
 #### entries属性
 
 我们可以直接访问entries属性
 
-```
+```kotlin
 val entries: Set<Entry<K, V>>
 ```
 
 获取该Map中的所有键/值对的Set。这个Entry类型定义如下：
 
-```
+```kotlin
  public interface Entry<out K, out V> {
         public val key: K
         public val value: V
@@ -679,7 +243,7 @@ val entries: Set<Entry<K, V>>
 
 代码示例
 
-```
+```kotlin
 >>> val map = mapOf("x" to 1, "y" to 2, "z" to 3)
 >>> map
 {x=1, y=2, z=3}
@@ -689,7 +253,7 @@ val entries: Set<Entry<K, V>>
 
 这样，我们就可以遍历这个Entry的Set了：
 
-```
+```kotlin
 >>> map.entries.forEach({println("key="+ it.key + " value=" + it.value)})
 key=x value=1
 key=y value=2
@@ -700,13 +264,13 @@ key=z value=3
 
 访问keys属性：
 
-```
+```kotlin
 val keys: Set<K>
 ```
 
 获取Map中的所有键的Set。
 
-```
+```kotlin
 >>> map.keys
 [x, y, z]
 ```
@@ -715,7 +279,7 @@ val keys: Set<K>
 
 访问` val values: Collection<V>`获取Map中的所有值的Collection。这个值的集合可能包含重复值。
 
-```
+```kotlin
 >>> map.values
 [1, 2, 3]
 ```
@@ -724,7 +288,7 @@ val keys: Set<K>
 
 访问`val size: Int`获取map键/值对的数目。
 
-```
+```kotlin
 >>> map.size
 3
 ```
@@ -733,13 +297,13 @@ val keys: Set<K>
 
 我们使用get函数来通过key来获取value的值。
 
-```
+```kotlin
 operator fun get(key: K): V?
 ```
 
 对应的操作符是`[]`：
 
-```
+```kotlin
 >>> map["x"]
 1
 >>> map.get("x")
@@ -749,40 +313,40 @@ operator fun get(key: K): V?
 
 如果这个key不在Map中，就返回null。
 
-```
+```kotlin
 >>> map["k"]
 null
 ```
 
 如果不想返回null，可以使用getOrDefault函数
 
-```
+```kotlin
 getOrDefault(key: K, defaultValue: @UnsafeVariance V): V
 ```
 
 当为null时，不返回null，而是返回设置的一个默认值：
 
-```
+```kotlin
 >>> map.getOrDefault("k",0)
 0
 ```
 
 这个默认值的类型，要和V对应。类型不匹配会报错：
 
-```
+```kotlin
 >>> map.getOrDefault("k","a")
 error: type mismatch: inferred type is String but Int was expected
 map.getOrDefault("k","a")
                      ^
 ```
 
-### 5.5.4 Map操作符函数
+### Map操作符函数
 
 #### `containsKey(key: K): Boolean`
 
 是否包含该key。
 
-```
+```kotlin
 >>> val map = mapOf("x" to 1, "y" to 2, "z" to 3)
 >>> map.containsKey("x")
 true
@@ -794,7 +358,7 @@ false
 
 是否包含该value。
 
-```
+```kotlin
 >>> val map = mapOf("x" to 1, "y" to 2, "z" to 3)
 >>> map.containsValue(2)
 true
@@ -806,7 +370,7 @@ false
 
 `Map.Entry<K, V>`的操作符函数，分别用来直接访问key和value。
 
-```
+```kotlin
 >>> val map = mapOf("x" to 1, "y" to 2, "z" to 3)
 >>> map.entries.forEach({println("key="+ it.component1() + " value=" + it.component2())})
 key=x value=1
@@ -816,7 +380,7 @@ key=z value=3
 
 这两个函数的定义如下：
 
-```
+```kotlin
 @kotlin.internal.InlineOnly
 public inline operator fun <K, V> Map.Entry<K, V>.component1(): K = key
 
@@ -828,7 +392,7 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
 
 把Map的Entry转换为Pair。
 
-```
+```kotlin
 >>> map.entries
 [x=1, y=2, z=3]
 >>> map.entries.forEach({println(it.toPair())})
@@ -841,7 +405,7 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
 
 通过key获取值，当没有值可以设置默认值。
 
-```
+```kotlin
 >>> val map = mutableMapOf<String, Int?>()
 >>> map.getOrElse("x", { 1 })
 1
@@ -854,7 +418,7 @@ public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
 
 当Map中不存在这个key，调用get函数，如果不想返回null，直接抛出异常，可调用此方法。
 
-```
+```kotlin
 val map = mutableMapOf<String, Int?>()
 >>> map.get("v")
 null
@@ -868,7 +432,7 @@ java.util.NoSuchElementException: Key v is missing in the map.
 
 如果不存在这个key，就添加这个key到Map中，对应的value是defaultValue。
 
-```
+```kotlin
 >>> val map = mutableMapOf<String, Int?>()
 >>> map.getOrPut("x", { 2 })
 2
@@ -880,7 +444,7 @@ java.util.NoSuchElementException: Key v is missing in the map.
 
 这个函数返回的是 `entries.iterator()`。这样我们就可以像下面这样使用for循环来遍历Map：
 
-```
+```kotlin
 >>> val map = mapOf("x" to 1, "y" to 2, "z" to 3 )
 >>> for((k,v) in map){println("key=$k, value=$v")}
 key=x, value=1
@@ -892,7 +456,7 @@ key=z, value=3
 
 把Map的Key设置为通过转换函数transform映射之后的值。
 
-```
+```kotlin
 >>> val map:Map<Int,String> = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> val mmap = map.mapKeys{it.key * 10}
 >>> mmap
@@ -902,7 +466,7 @@ key=z, value=3
 注意，这里的it是Map的Entry。
 如果不巧，有任意两个key通过映射之后相等了，那么后面的key将会覆盖掉前面的key。
 
-```
+```kotlin
 >>> val mmap = map.mapKeys{it.key * it.key}
 >>> mmap
 {1=z, 4=b, 9=c}
@@ -914,7 +478,7 @@ key=z, value=3
 
 对应的这个函数是把Map的value设置为通过转换函数transform转换之后的新值。
 
-```
+```kotlin
 >>> val map:Map<Int,String> = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> val mmap = map.mapValues({it.value + "$"})
 >>> mmap
@@ -925,7 +489,7 @@ key=z, value=3
 
 返回过滤出满足key判断条件的元素组成的新Map。
 
-```
+```kotlin
 >>> val map:Map<Int,String> = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map.filterKeys({it>0})
 {1=a, 2=b, 3=c}
@@ -937,7 +501,7 @@ key=z, value=3
 
 返回过滤出满足value判断条件的元素组成的新Map。
 
-```
+```kotlin
 >>> val map:Map<Int,String> = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map.filterValues({it>"b"})
 {3=c, -1=z}
@@ -949,7 +513,7 @@ key=z, value=3
 
 返回过滤出满足Entry判断条件的元素组成的新Map。
 
-```
+```kotlin
 >>> val map:Map<Int,String> = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map.filter({it.key>0 && it.value > "b"})
 {3=c}
@@ -959,7 +523,7 @@ key=z, value=3
 
 把持有Pair的Iterable集合转换为Map。
 
-```
+```kotlin
 >>> val pairList = listOf(Pair(1,"a"),Pair(2,"b"),Pair(3,"c"))
 >>> pairList
 [(1, a), (2, b), (3, c)]
@@ -971,7 +535,7 @@ key=z, value=3
 
 把一个只读的Map转换为可编辑的MutableMap。
 
-```
+```kotlin
 >>> val map = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map[1]="x"
 error: unresolved reference. None of the following candidates is applicable ...
@@ -991,7 +555,7 @@ map[1]="x"
 
 Map的加法运算符函数如下：
 
-```
+```kotlin
 operator fun <K, V> Map<out K, V>.plus(pair: Pair<K, V>): Map<K, V>
 operator fun <K, V> Map<out K, V>.plus(pairs: Iterable<Pair<K, V>>): Map<K, V>
 operator fun <K, V> Map<out K, V>.plus(pairs: Array<out Pair<K, V>>): Map<K, V>
@@ -1001,7 +565,7 @@ operator fun <K, V> Map<out K, V>.plus(map: Map<out K, V>): Map<K, V>
 
 代码示例：
 
-```
+```kotlin
 >>> val map = mapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map+Pair(10,"g")
 {1=a, 2=b, 3=c, -1=z, 10=g}
@@ -1017,7 +581,7 @@ operator fun <K, V> Map<out K, V>.plus(map: Map<out K, V>): Map<K, V>
 
 加并赋值函数：
 
-```
+```kotlin
 inline operator fun <K, V> MutableMap<in K, in V>.plusAssign(pair: Pair<K, V>)
 inline operator fun <K, V> MutableMap<in K, in V>.plusAssign(pairs: Iterable<Pair<K, V>>)
 inline operator fun <K, V> MutableMap<in K, in V>.plusAssign(pairs: Array<out Pair<K, V>>)
@@ -1028,7 +592,7 @@ inline operator fun <K, V> MutableMap<in K, in V>.plusAssign(map: Map<K, V>)
 
 代码示例：
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map+=Pair(10,"g")
 >>> map
@@ -1047,7 +611,7 @@ inline operator fun <K, V> MutableMap<in K, in V>.plusAssign(map: Map<K, V>)
 
 根据key设置元素的value。如果该key存在就更新value；不存在就添加，但是put的返回值是null。
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map
 {1=a, 2=b, 3=c, -1=z}
@@ -1065,7 +629,7 @@ a
 
 把一个Map全部添加到一个MutableMap中。
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> val map2 = mapOf(99 to "aa", 100 to "bb")
 >>> map.putAll(map2)
@@ -1075,7 +639,7 @@ a
 
 如果有key重复的，后面的值会覆盖掉前面的值：
 
-```
+```kotlin
 >>> map
 {1=a, 2=b, 3=c, -1=z, 99=aa, 100=bb}
 >>> map.putAll(mapOf(1 to "www",2 to "tttt"))
@@ -1087,7 +651,7 @@ a
 
 根据键值key来删除元素。
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map.remove(-1)
 z
@@ -1103,7 +667,7 @@ null
 
 清空MutableMap。
 
-```
+```kotlin
 >>> val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c", -1 to "z")
 >>> map
 {1=a, 2=b, 3=c, -1=z}

@@ -1,10 +1,10 @@
 ## 1. 概述
 
-Kotlin 成为 Android 官方支持的编程语言，今天一早上各个群都在讨论Kotlin，微信留言也有人问我的观点~~
+Kotlin 成为 Android 官方支持的编程语言，今天一早上各个群都在讨论Kotlin，微信留言也有人问我的观点。
 
 其实我对Kotlin并没有那么强烈的想学习的冲动，看了下语法和Groovy、Javascript都很类似，可以看一个代码片段：
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icZD75Dib6QDjyl2R5RiaC2MmkMaaibbagXjYKFOxQ6FXQPd2ttgpuZV7hw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![img](../assets/kotlin_study_1.png)
 
 > 代码片段引自：http://droidyue.com/blog/2017/05/18/why-do-i-turn-to-kotlin/
 
@@ -17,17 +17,15 @@ Kotlin 成为 Android 官方支持的编程语言，今天一早上各个群都�
 
 所以，Kotlin肯定时值得学习的，但并没有传的那么夸张。有精力就去学习，有自己的学习计划也可以放一放。
 
-我想只有用得多了，Kotlin的优势应该会慢慢展现出来的，但是应该需要一个较为漫长的过渡期（如果有公司内部支持，那么这个过程肯定很快）~
+我想只有用得多了，Kotlin的优势应该会慢慢展现出来的，但是应该需要一个较为漫长的过渡期（如果有公司内部支持，那么这个过程肯定很快）
 
-当然，作为一名Android开发者，Google支持的东西，我肯定要无条件支持呀，所以接下来，就是Kotlin学习资料的推荐~耐不住性子的同学可以刚好接下来就是周末，尽情的学习吧~
+当然，作为一名Android开发者，Google支持的东西，我肯定要无条件支持呀，所以接下来，就是Kotlin学习资料的推荐~耐不住性子的同学可以刚好接下来就是周末，尽情的学习吧
 
 ## 2. Kotlin学习资料
 
 （1）官方资料
 
-首发的肯定是kotlin的官方github地址了：
-
-> https://github.com/JetBrains/kotlin
+首发的肯定是kotlin的官方github地址了：https://github.com/JetBrains/kotlin
 
 晚上看了下trending，稳稳的站在第一。
 
@@ -39,8 +37,6 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 > https://www.kotlincn.net/docs/reference/
 >
-> 
->
 > https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details
 
 ![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icCibuLGRlDKJoLsZSM0oTNj8tnEK3n3OtD0XR6pWcaic003iaX3hR7piatA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
@@ -51,11 +47,11 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 ![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icRKAxVsnTWqDfFkK8ZuBPzUENmRXoeMhk8vvPcyvTgtTAWa4icfqh5hQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
 
-支持在线阅读和下载pdf~
+支持在线阅读和下载pdf
 
 （3）张涛的开源实验室
 
-之前在推送中推荐过张涛的博客，博客质量都很高，在很早的时候就开始编写Kotlin相关博客，此外还有很多比较新的知识~
+之前在推送中推荐过张涛的博客，博客质量都很高，在很早的时候就开始编写Kotlin相关博客，此外还有很多比较新的知识
 
 > https://kymjs.com/column/kotlin.html
 
@@ -63,15 +59,13 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 （4）大精-wing的地方酒馆
 
-让你的代码量减少3倍！使用kotlin开发Android系列~
+让你的代码量减少3倍！使用kotlin开发Android系列
 
 ![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icSjhTicYp2256Mq7mmtMygLEP1ibgsF95u9GX1tSVTaa1BAG7HKSOO48g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
 
 > http://androidwing.net/index.php/89
 
-还有个Kotlin项目：
-
-> https://github.com/githubwing/GankClient-Kotlin
+还有个Kotlin项目：https://github.com/githubwing/GankClient-Kotlin
 
 （5）Kotlin 视频教程
 
@@ -89,9 +83,8 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 > 腾讯视频：http://v.qq.com/boke/gplay/903446d6231d8612d198c58fb86eb4dc_t6d000101bd9lx1.html
 >
-> 百度云：
+> 百度云：http://pan.baidu.com/s/1nvGYAfB
 >
-> http://pan.baidu.com/s/1nvGYAfB
 
 （6）开源项目
 
@@ -123,14 +116,10 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 >
 > by:Ragnarok Zhou 
 
-最后要非常感谢，今天给我投稿的朋友（汇总资料，就直接放出了链接啦）~
+最后要非常感谢，今天给我投稿的朋友（汇总资料，就直接放出了链接啦）
 
 > 使用Kotlin在Android Studio上开发App
 >
 > http://blog.csdn.net/qq_25867141/article/details/52875330
 >
 > by:Blincheng
-
-好文有很多，感谢所有人的分享
-
-大家有什么好的资料，可以直接浏览

@@ -1,10 +1,10 @@
-### 5.3.5 List集合类的`any` `all ``none ``count ``reduce ``fold ``max ``min` `sum` 函数算子(operator)
+### List集合类的基本运算函数
 
 #### `any() `判断集合至少有一个元素
 
 这个函数定义如下：
 
-```
+```kotlin
 public fun <T> Iterable<T>.any(): Boolean {
     for (element in this) return true
     return false
@@ -15,7 +15,7 @@ public fun <T> Iterable<T>.any(): Boolean {
 
 代码示例：
 
-```
+```kotlin
 >>> val emptyList = listOf<Int>()
 >>> emptyList.any()
 false
@@ -28,7 +28,7 @@ true
 
 这个函数定义如下：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Boolean {
     for (element in this) if (predicate(element)) return true
     return false
@@ -39,7 +39,7 @@ public inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Boolean {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1, 2, 3)
 >>> list.any() // 至少有1个元素
 true
@@ -53,7 +53,7 @@ false
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.all(predicate: (T) -> Boolean): Boolean {
     for (element in this) if (!predicate(element)) return false
     return true
@@ -64,7 +64,7 @@ public inline fun <T> Iterable<T>.all(predicate: (T) -> Boolean): Boolean {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0,2,4,6,8)
 >>> list.all({it%2==0})
 true
@@ -76,7 +76,7 @@ false
 
 函数定义：
 
-```
+```kotlin
 public fun <T> Iterable<T>.none(): Boolean {
     for (element in this) return false
     return true
@@ -87,7 +87,7 @@ public fun <T> Iterable<T>.none(): Boolean {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf<Int>()
 >>> list.none()
 true
@@ -97,7 +97,7 @@ true
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.none(predicate: (T) -> Boolean): Boolean {
     for (element in this) if (predicate(element)) return false
     return true
@@ -108,7 +108,7 @@ public inline fun <T> Iterable<T>.none(predicate: (T) -> Boolean): Boolean {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0,2,4,6,8)
 >>> list.none({it%2==1})
 true
@@ -120,7 +120,7 @@ false
 
 函数定义：
 
-```
+```kotlin
 public fun <T> Iterable<T>.count(): Int {
     var count = 0
     for (element in this) count++
@@ -130,7 +130,7 @@ public fun <T> Iterable<T>.count(): Int {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0,2,4,6,8,9)
 >>> list.count()
 6
@@ -140,7 +140,7 @@ public fun <T> Iterable<T>.count(): Int {
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.count(predicate: (T) -> Boolean): Int {
     var count = 0
     for (element in this) if (predicate(element)) count++
@@ -150,7 +150,7 @@ public inline fun <T> Iterable<T>.count(predicate: (T) -> Boolean): Int {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0,2,4,6,8,9)
 >>> list.count()
 6
@@ -162,7 +162,7 @@ public inline fun <T> Iterable<T>.count(predicate: (T) -> Boolean): Int {
 
 函数定义：
 
-```
+```kotlin
 public inline fun <S, T: S> Iterable<T>.reduce(operation: (acc: S, T) -> S): S {
     val iterator = this.iterator()
     if (!iterator.hasNext()) throw UnsupportedOperationException("Empty collection can't be reduced.")
@@ -178,7 +178,7 @@ public inline fun <S, T: S> Iterable<T>.reduce(operation: (acc: S, T) -> S): S {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3,4,5,6,7,8,9)
 >>> list.reduce({sum, next->sum+next})
 45
@@ -194,7 +194,7 @@ abc
 
 函数定义：
 
-```
+```kotlin
 public inline fun <S, T: S> List<T>.reduceRight(operation: (T, acc: S) -> S): S {
     val iterator = listIterator(size)
     if (!iterator.hasPrevious())
@@ -212,7 +212,7 @@ public inline fun <S, T: S> List<T>.reduceRight(operation: (T, acc: S) -> S): S 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf("a","b","c")
 >>> list.reduceRight({total, s -> s+total})
 cba
@@ -220,7 +220,7 @@ cba
 
 如果我们位置放错了，会输出下面的结果：
 
-```
+```kotlin
 >>> list.reduceRight({total, s -> total+s})
 abc
 ```
@@ -229,7 +229,7 @@ abc
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> R): R {
     var accumulator = initial
     for (element in this) accumulator = operation(accumulator, element)
@@ -241,7 +241,7 @@ public inline fun <T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> 
 
 代码示例：
 
-```
+```kotlin
 >>> val list=listOf(1,2,3,4)
 >>> list.fold(100,{total, next -> next + total})
 110
@@ -251,7 +251,7 @@ public inline fun <T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> 
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T, R> List<T>.foldRight(initial: R, operation: (T, acc: R) -> R): R {
     var accumulator = initial
     if (!isEmpty()) {
@@ -266,7 +266,7 @@ public inline fun <T, R> List<T>.foldRight(initial: R, operation: (T, acc: R) ->
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf("a","b","c")
 >>> list.foldRight("xyz",{s, pre -> pre + s})
 xyzcba
@@ -278,7 +278,7 @@ xyzcba
 
 再写个代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) 
 >>> list.forEach { value -> if (value > 7) println(value) } 
 8
@@ -289,7 +289,7 @@ xyzcba
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.forEachIndexed(action: (index: Int, T) -> Unit): Unit {
     var index = 0
     for (item in this) action(index++, item)
@@ -298,7 +298,7 @@ public inline fun <T> Iterable<T>.forEachIndexed(action: (index: Int, T) -> Unit
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) 
 >>> list.forEachIndexed { index, value -> if (value > 8) println("value of index $index is $value, greater than 8") } 
 
@@ -309,7 +309,7 @@ value of index 9 is 9, greater than 8
 
 `max`函数定义：
 
-```
+```kotlin
 public fun <T : Comparable<T>> Iterable<T>.max(): T? {
     val iterator = iterator()
     if (!iterator.hasNext()) return null
@@ -326,7 +326,7 @@ public fun <T : Comparable<T>> Iterable<T>.max(): T? {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3)
 >>> list.max()
 3
@@ -338,7 +338,7 @@ c
 
 `min`函数定义：
 
-```
+```kotlin
 public fun <T : Comparable<T>> Iterable<T>.min(): T? {
     val iterator = iterator()
     if (!iterator.hasNext()) return null
@@ -355,7 +355,7 @@ public fun <T : Comparable<T>> Iterable<T>.min(): T? {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3)
 >>> list.min()
 1
@@ -367,7 +367,7 @@ a
 
 在Kotlin中，字符串的大小比较比较有意思的，我们直接通过代码示例来学习一下：
 
-```
+```kotlin
 >>> "c" > "a"
 true
 >>> "abd" > "abc"
@@ -381,7 +381,7 @@ true
 我们可以看出，字符串的大小比较是按照对应的下标的字符进行比较的。
 另外，布尔值的比较是`true`大于`false`：
 
-```
+```kotlin
 >>> true > false
 true
 ```
@@ -390,7 +390,7 @@ true
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): T? {
     val iterator = iterator()
     if (!iterator.hasNext()) return null
@@ -414,7 +414,7 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(100,-500,300,200)
 >>> list.maxBy({it})
 300
@@ -428,7 +428,7 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(100,-500,300,200)
 >>> list.minBy({it})
 -500
@@ -442,7 +442,7 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): 
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.sumBy(selector: (T) -> Int): Int {
     var sum: Int = 0
     for (element in this) {
@@ -457,7 +457,7 @@ public inline fun <T> Iterable<T>.sumBy(selector: (T) -> Int): Int {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3,4)
 >>> list.sumBy({it})
 10
@@ -467,7 +467,7 @@ public inline fun <T> Iterable<T>.sumBy(selector: (T) -> Int): Int {
 
 类型错误反例：
 
-```
+```kotlin
 >>> val list = listOf("a","b","c")
 >>> list.sumBy({it})
 error: type inference failed: inline fun <T> Iterable<T>.sumBy(selector: (T) -> Int): Int
@@ -479,5 +479,4 @@ list.sumBy({it})
 error: type mismatch: inferred type is (String) -> String but (String) -> Int was expected
 list.sumBy({it})
            ^
-
 ```
