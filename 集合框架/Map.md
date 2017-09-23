@@ -10,7 +10,7 @@ Kotlin中的Map与List、Set一样，Map也分为只读Map和可变的MutableMap
 
 Map没有继承于Collection接口。其类图结构如下：
 
-![img](https://segmentfault.com/img/remote/1460000010313212)
+![map](images/map.png)
 
 在接口`interface Map<K, out V>`中，K是键值的类型，V是对应的映射值的类型。这里的`out V`表示类型为V或V的子类。这是泛型的相关知识，我们将在下一章节中介绍。
 

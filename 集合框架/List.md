@@ -4,7 +4,7 @@ List接口继承于Collection接口，元素以线性方式存储，集合中可
 
 其类图结构如下：
 
-![img](https://segmentfault.com/img/remote/1460000010313210)
+![List](images/collection.png)
 
 其中，`Iterator`是所有容器类`Collection`的迭代器。迭代器（Iterator）模式，又叫做游标（Cursor）模式。GOF给出的定义为：提供一种方法访问一个容器对象中各个元素，而又不需暴露该对象的内部细节。 从定义可见，迭代器模式是为容器而生。
 

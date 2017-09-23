@@ -6,7 +6,7 @@
 
 Set的类图结构如下：
 
-![img](https://segmentfault.com/img/remote/1460000010313211)
+![set](images/set.png)
 
 ### 空集
 
