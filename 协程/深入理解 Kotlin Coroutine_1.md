@@ -1,4 +1,4 @@
-# 深入理解 Kotlin Coroutine （一）
+# 深入理解 Kotlin Coroutine (一)
 
 本文主要介绍 Kotlin Coroutine 的基础 API，有关 Kotlinx.Coroutine 的内容，我们将在下一期给大家介绍。由于本人水平有限，如果大家有什么异议，欢迎直接抛出来跟我讨论。
 

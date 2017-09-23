@@ -1,4 +1,4 @@
-# 深入理解 Kotlin coroutine (二）
+# 深入理解 Kotlin coroutine (二)
 
 上周我们把 Kotlin Coroutine 的基本 API 挨个讲了一下，也给出了一些简单的封装。
 

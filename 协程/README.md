@@ -2,8 +2,9 @@
 
 * [轻量级线程：协程1](轻量级线程：协程1.md)
 * [轻量级线程：协程2](轻量级线程：协程2.md)
-* [深入理解 Kotlin Coroutine_1](深入理解 Kotlin Coroutine.md)
-* [深入理解 Kotlin Coroutine_2](深入理解 Kotlin coroutine_2.md)
+* [深入理解 Kotlin Coroutine_1](深入理解 Kotlin Coroutine_1.md)
+* [深入理解 Kotlin Coroutine_2](深入理解 Kotlin Coroutine_2.md)
+* [深入理解 Kotlin Coroutine_2](深入理解 Kotlin Coroutine_3.md)
 
 协程提供了一种避免阻塞线程并用更廉价、更可控的操作替代线程阻塞的方法：协程挂起。
 
