@@ -4,7 +4,7 @@ Kotlin 成为 Android 官方支持的编程语言，今天一早上各个群都�
 
 其实我对Kotlin并没有那么强烈的想学习的冲动，看了下语法和Groovy、Javascript都很类似，可以看一个代码片段：
 
-![img](../assets/kotlin_study_1.png)
+![Kotlin 学习资料](images/kotlin_study_1.png)
 
 > 代码片段引自：http://droidyue.com/blog/2017/05/18/why-do-i-turn-to-kotlin/
 
@@ -39,13 +39,13 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 >
 > https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icCibuLGRlDKJoLsZSM0oTNj8tnEK3n3OtD0XR6pWcaic003iaX3hR7piatA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_2.png)
 
 （2）《Kotlin for android developers》中文版翻译
 
 > https://github.com/wangjiegulu/kotlin-for-android-developers-zh/blob/master/README.md
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icRKAxVsnTWqDfFkK8ZuBPzUENmRXoeMhk8vvPcyvTgtTAWa4icfqh5hQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_3.png)
 
 支持在线阅读和下载pdf
 
@@ -55,13 +55,13 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 
 > https://kymjs.com/column/kotlin.html
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icsiaUYSibA8ClzqAqNR2pdlW6qSnVESf27gKEtQWBeoic3ksq0SUfJkJuQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_4.png)
 
 （4）大精-wing的地方酒馆
 
 让你的代码量减少3倍！使用kotlin开发Android系列
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icSjhTicYp2256Mq7mmtMygLEP1ibgsF95u9GX1tSVTaa1BAG7HKSOO48g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_5.png)
 
 > http://androidwing.net/index.php/89
 
@@ -77,18 +77,16 @@ Readme中包含官方的tutorials、推荐的图书《Kotlin in Action》、《K
 >
 > https://github.com/enbandari/Kotlin-Tutorials
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1icYRTweaTAydtjZ9H9YGH4697VUmF0JRm1hTJ9vpdMz7FfwzIhSVzic3Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_6.png)
 
 可以百度云下载或者腾讯视频在线观看。
 
-> 腾讯视频：http://v.qq.com/boke/gplay/903446d6231d8612d198c58fb86eb4dc_t6d000101bd9lx1.html
->
-> 百度云：http://pan.baidu.com/s/1nvGYAfB
->
+- [腾讯视频](http://v.qq.com/boke/gplay/903446d6231d8612d198c58fb86eb4dc_t6d000101bd9lx1.html)
+- [百度云](http://pan.baidu.com/s/1nvGYAfB)
 
 （6）开源项目
 
-![img](http://mmbiz.qpic.cn/mmbiz_png/MOu2ZNAwZwNw7JX0DDboic2NQpec2WQ1iciasvWqiapvZaBw87CysVD6VRJOZsuziawKjmSXIBhr1Ulbic5GYRbj6QzA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+![Kotlin 学习资料](images/kotlin_study_7.png)
 
 > 一个用Kotlin写的简单漫画APP
 >
