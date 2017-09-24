@@ -8,7 +8,7 @@
 
 ## 0. 引子
 
-Kotlin 100% 与 Java 兼容，所以抛开语言表面上面的种种特质之外，背后的语言逻辑或者说“灵魂”与 Java 总是想通的。本文只涉及 Kotlin Jvm，Kotlin Js、Kotlin Native 的具体实现可能有差异。
+Kotlin 100% 与 Java 兼容，所以抛开语言表面上面的种种特质之外，背后的语言逻辑或者说“灵魂”与 Java 总是相通的。本文只涉及 Kotlin Jvm，Kotlin Js、Kotlin Native 的具体实现可能有差异。
 
 最近一段时间在慕课网上发了一套 Kotlin 的入门视频，涵盖了基础语法、面向对象、高阶函数、DSL、协程等比较有特色的知识点，不过有朋友提出了疑问：这门课为什么不专门讲讲泛型、反射和注解呢？
 
@@ -218,9 +218,7 @@ public interface MutableCollection<E> : Collection<E>, MutableIterable<E> {
 } 
 ```
 
-换言之，`MutableCollection<Number>` 与
-
-`MutableCollection<Int>` 没有什么关系。
+换言之，`MutableCollection<Number>` 与 `MutableCollection<Int>` 没有什么关系。
 
 那么请注意看 `addAll` 的声明，参数是 `Collection<E>`，而 Collection 是协变的，所以传入的参数可以是任意 E 或者其子类的集合。
 
@@ -261,7 +259,7 @@ var myList: MyCollection<Number> = MyCollection<Int>()
 myList.add(3.0) 
 ```
 
-上面的代码毫无疑问可以编译，但运行时就会比较尴尬，因为 `MyCollection<Int>` 希望接受的是 Int，没想到来了一个 Double。。
+上面的代码毫无疑问可以编译，但运行时就会比较尴尬，因为 `MyCollection<Int>` 希望接受的是 Int，没想到来了一个 Double
 
 对于协变的类型，通常我们是不允许将泛型类型作为传入参数的类型的，或者说，对于协变类型，我们通常是不允许其涉及泛型参数的部分被改变的。这也很容易解释为什么 MutableCollection 是不变的，而 Collection 是协变的，因为在 Kotlin 当中，前者是可被修改的，后者是不可被修改的。
 

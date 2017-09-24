@@ -12,7 +12,7 @@ List接口继承于Collection接口，元素以线性方式存储，集合中可
 
 我们可以使用`listOf`函数来构建一个不可变的List（read-only，只读的List）。它定义在`libraries/stdlib/src/kotlin/collections/Collections.kt` 里面。关于`listOf`这个构建函数有下面3个重载函数：
 
-```
+```kotlin
 @kotlin.internal.InlineOnly
 public inline fun <T> listOf(): List<T> = emptyList()
 
@@ -20,7 +20,6 @@ public fun <T> listOf(vararg elements: T): List<T> = if (elements.size > 0) elem
 
 @JvmVersion
 public fun <T> listOf(element: T): List<T> = java.util.Collections.singletonList(element)
-
 ```
 
 这些函数创建的List都是是只读的（readonly，也就是不可变的immutable ）、可序列化的。
@@ -285,13 +284,13 @@ java.util.NoSuchElementException
 
 ```kotlin
 private open inner class IteratorImpl : Iterator<E> {
-        protected var index = 0
-        override fun hasNext(): Boolean = index < size
-        override fun next(): E {
-            if (!hasNext()) throw NoSuchElementException()
-            return get(index++)
-        }
+    protected var index = 0
+    override fun hasNext(): Boolean = index < size
+    override fun next(): E {
+        if (!hasNext()) throw NoSuchElementException()
+        return get(index++)
     }
+}
 ```
 
 通过这个实现源码，我们可以更加清楚地明白Iterator的工作原理。

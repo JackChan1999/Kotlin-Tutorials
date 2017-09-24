@@ -4,7 +4,7 @@
 
 函数定义：
 
-```
+```kotlin
 public fun <T> Iterable<T>.take(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
@@ -27,7 +27,7 @@ public fun <T> Iterable<T>.take(n: Int): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf("a","b","c")
 >>> list
 [a, b, c]
@@ -44,7 +44,7 @@ public fun <T> Iterable<T>.take(n: Int): List<T> {
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.takeWhile(predicate: (T) -> Boolean): List<T> {
     val list = ArrayList<T>()
     for (item in this) {
@@ -60,7 +60,7 @@ public inline fun <T> Iterable<T>.takeWhile(predicate: (T) -> Boolean): List<T> 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,4,6,8,9)
 >>> list.takeWhile({it%2==0})
 []
@@ -77,7 +77,7 @@ public inline fun <T> Iterable<T>.takeWhile(predicate: (T) -> Boolean): List<T> 
 
 函数定义：
 
-```
+```kotlin
 public fun <T> List<T>.takeLast(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
@@ -100,7 +100,7 @@ public fun <T> List<T>.takeLast(n: Int): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.takeLast(0)
 []
@@ -118,7 +118,7 @@ java.lang.IllegalArgumentException: Requested element count -1 is less than zero
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> List<T>.takeLastWhile(predicate: (T) -> Boolean): List<T> {
     if (isEmpty())
         return emptyList()
@@ -142,7 +142,7 @@ public inline fun <T> List<T>.takeLastWhile(predicate: (T) -> Boolean): List<T> 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.takeLastWhile({it%2==0})
 [12, 16]
@@ -152,7 +152,7 @@ public inline fun <T> List<T>.takeLastWhile(predicate: (T) -> Boolean): List<T> 
 
 函数定义：
 
-```
+```kotlin
 public fun <T> Iterable<T>.drop(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return toList()
@@ -188,7 +188,7 @@ public fun <T> Iterable<T>.drop(n: Int): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.drop(5)
 [11, 12, 16]
@@ -205,7 +205,7 @@ java.lang.IllegalArgumentException: Requested element count -1 is less than zero
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.dropWhile(predicate: (T) -> Boolean): List<T> {
     var yielding = false
     val list = ArrayList<T>()
@@ -224,18 +224,17 @@ public inline fun <T> Iterable<T>.dropWhile(predicate: (T) -> Boolean): List<T> 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.dropWhile({it%2==0})
 [9, 11, 12, 16]
-
 ```
 
 #### `dropLast(n: Int)` 从最后去除n个元素
 
 函数定义：
 
-```
+```kotlin
 public fun <T> List<T>.dropLast(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     return take((size - n).coerceAtLeast(0))
@@ -244,7 +243,7 @@ public fun <T> List<T>.dropLast(n: Int): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.dropLast(3)
 [2, 4, 6, 8, 9]
@@ -255,15 +254,13 @@ public fun <T> List<T>.dropLast(n: Int): List<T> {
 >>> list.dropLast(-1)
 java.lang.IllegalArgumentException: Requested element count -1 is less than zero.
     at kotlin.collections.CollectionsKt___CollectionsKt.dropLast(_Collections.kt:573)
-
-
 ```
 
 #### `dropLastWhile(predicate: (T) -> Boolean)` 从最后满足条件的元素
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> List<T>.dropLastWhile(predicate: (T) -> Boolean): List<T> {
     if (!isEmpty()) {
         val iterator = listIterator(size)
@@ -279,7 +276,7 @@ public inline fun <T> List<T>.dropLastWhile(predicate: (T) -> Boolean): List<T> 
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(2,4,6,8,9,11,12,16)
 >>> list.dropLastWhile({it%2==0})
 [2, 4, 6, 8, 9, 11]
@@ -289,7 +286,7 @@ public inline fun <T> List<T>.dropLastWhile(predicate: (T) -> Boolean): List<T> 
 
 函数定义：
 
-```
+```kotlin
 public fun <T> List<T>.slice(indices: IntRange): List<T> {
     if (indices.isEmpty()) return listOf()
     return this.subList(indices.start, indices.endInclusive + 1).toList()
@@ -298,7 +295,7 @@ public fun <T> List<T>.slice(indices: IntRange): List<T> {
 
 代码示例：
 
-```
+```kotlin
 val list = listOf(2,4,6,8,9,11,12,16)
 >>> list
 [2, 4, 6, 8, 9, 11, 12, 16]
@@ -318,7 +315,7 @@ val list = listOf(2,4,6,8,9,11,12,16)
 
 函数定义：
 
-```
+```kotlin
 public fun <T> List<T>.slice(indices: Iterable<Int>): List<T> {
     val size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
@@ -334,7 +331,7 @@ public fun <T> List<T>.slice(indices: Iterable<Int>): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> list
 [2, 4, 6, 8, 9, 11, 12, 16]
 >>> list.slice(listOf(2,4,6))
@@ -347,7 +344,7 @@ public fun <T> List<T>.slice(indices: Iterable<Int>): List<T> {
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T, C : MutableCollection<in T>> Iterable<T>.filterTo(destination: C, predicate: (T) -> Boolean): C {
     for (element in this) if (predicate(element)) destination.add(element)
     return destination
@@ -358,7 +355,7 @@ public inline fun <T, C : MutableCollection<in T>> Iterable<T>.filterTo(destinat
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3,4,5,6,7)
 >>> val dest = mutableListOf<Int>()
 >>> list.filterTo(dest,{it>3})
@@ -371,7 +368,7 @@ public inline fun <T, C : MutableCollection<in T>> Iterable<T>.filterTo(destinat
 
 函数定义：
 
-```
+```kotlin
 public inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> {
     return filterTo(ArrayList<T>(), predicate)
 }
@@ -381,7 +378,7 @@ public inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> {
 
 代码示例：
 
-```
+```kotlin
 >>> val list = listOf(1,2,3,4,5,6,7)
 >>> list.filter({it>3})
 [4, 5, 6, 7]

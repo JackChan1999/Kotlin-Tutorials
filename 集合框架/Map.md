@@ -117,7 +117,7 @@ z
 
 这个创建函数内部是调用的LinkedHashMap构造函数，其相关代码如下：
 
-```
+```kotlin
 pairs.toMap(LinkedHashMap(mapCapacity(pairs.size)))
 ```
 
@@ -235,10 +235,10 @@ val entries: Set<Entry<K, V>>
 获取该Map中的所有键/值对的Set。这个Entry类型定义如下：
 
 ```kotlin
- public interface Entry<out K, out V> {
-        public val key: K
-        public val value: V
-    }
+public interface Entry<out K, out V> {
+    public val key: K
+    public val value: V
+}
 ```
 
 代码示例

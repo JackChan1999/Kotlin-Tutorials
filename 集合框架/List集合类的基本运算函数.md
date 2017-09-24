@@ -305,7 +305,7 @@ public inline fun <T> Iterable<T>.forEachIndexed(action: (index: Int, T) -> Unit
 value of index 9 is 9, greater than 8
 ```
 
-#### `max` 、`min`查询最大、最小的元素，空集则返回null
+#### max 、min查询最大、最小的元素，空集则返回null
 
 `max`函数定义：
 
