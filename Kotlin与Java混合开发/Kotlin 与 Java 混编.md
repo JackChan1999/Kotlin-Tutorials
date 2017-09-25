@@ -11,9 +11,9 @@
 
 在 Mac 上，系统默认的快捷键为`control+shift+command+K`，这个组合键实在有点反人类，建议你自定义一个你觉得舒服的快捷键。
 
-快捷键可以通过你的编译器 *keymap* 中修改：`command+,` -> 搜索`keymap` -> 右侧搜索`kotlin`，可以查看到`Convert Java File to Kotlin File`项。
+快捷键可以通过你的编译器 keymap 中修改：`command+,` -> 搜索`keymap` -> 右侧搜索`kotlin`，可以查看到`Convert Java File to Kotlin File`项。
 
-![图3-1-1](http://cdn.kymjs.com/kotlin/3-1-1.png)
+![kotlin与java互操作](images/kotlin与java互操作_1.png)
 
 #### 1.2 注意 Class 调用
 
