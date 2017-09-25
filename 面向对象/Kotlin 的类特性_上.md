@@ -69,7 +69,7 @@ class Person(private var name: String) {
 
 点开 IDEA，工程目录中的 out 列表，看到我们写完的 `Person`被编译为 class 文件后的样子。
 
-![Kotlin](http://cdn.kymjs.com/kotlin/4-3-1.png)
+![Kotlin](images/oop.png)
 
 #### 3.1 open 修饰符
 
