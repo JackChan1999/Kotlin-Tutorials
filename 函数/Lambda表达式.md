@@ -21,4 +21,3 @@ args.forEach({println(it)})
 args.forEach({it -> println(it)})
 args.forEach(::println)
 ```
-
