@@ -189,7 +189,7 @@ null
 
 #### `indexOf(element: T): Int`
 
-返回指定下标的元素，没有就返回-1
+返回指定元素的下标，没有就返回-1
 
 ```kotlin
 >>> val list = listOf("a","b","c")

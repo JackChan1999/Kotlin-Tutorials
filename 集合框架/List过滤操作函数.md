@@ -386,5 +386,5 @@ public inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> {
 
 另外，还有下面常用的过滤函数：
 
-`filterNot(predicate: (T) -> Boolean)`, 用来过滤所有不满足条件的元素 ；
+`filterNot(predicate: (T) -> Boolean)`, 用来过滤所有不满足条件的元素；     
 `filterNotNull()` 过滤掉`null`元素。

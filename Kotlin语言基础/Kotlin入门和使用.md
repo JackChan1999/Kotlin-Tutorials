@@ -4,7 +4,7 @@
 
 ### Java 有哪些问题？
 
-- 空引用（Null references）：连空引用的发明者都成这是个 billion-dollar 错误（参见)。不论你费多大的功夫，你都无法避免它。因为 Java 的类型系统就是不安全的。
+- 空引用（Null references）：连空引用的发明者都承认这是个 billion-dollar 错误（参见)。不论你费多大的功夫，你都无法避免它。因为 Java 的类型系统就是不安全的。
 
 - 原始类型（Raw types）：我们在开发的时候总是会为了保持兼容性而卡在范型原始类型的问题上，我们都知道要努力避免 raw type 的警告，但是它们毕竟是在语言层面上的存在，这必定会造成误解和不安全因素。
 
@@ -58,7 +58,7 @@
 - 声明点变量（Declaration-site variance）
 - 区间表达式（Range expressions）
 
-我们将在这篇文章里提及以上大多数特性。Kotlin 之所以能跟随者 JVM 的生态系统不断地进步，是因为他没有任何限制。它编译出来的正是 JVM 字节码。在 JVM 看来，它就跟其他语言一样样的。事实上，如果你在 IntelliJ 或者 Android Studio 上用 Kotlin 的插件，它自带里一个字节码查看器，可以显示每个方法生成的 JVM 字节码。
+我们将在这篇文章里提及以上大多数特性。Kotlin 之所以能跟随着 JVM 的生态系统不断地进步，是因为他没有任何限制。它编译出来的正是 JVM 字节码。在 JVM 看来，它就跟其他语言一样样的。事实上，如果你在 IntelliJ 或者 Android Studio 上用 Kotlin 的插件，它自带里一个字节码查看器，可以显示每个方法生成的 JVM 字节码。
 
 # Syntax
 
@@ -308,16 +308,14 @@ print("Hello ${args[0]}")
 
 ## Basic Types
 
-```kotlin
-Type		Bit width
---
-Double		64
-Float		32
-Long		64
-Int			32
-Short		16
-Byte		8
-```
+| Type   | Bit width |
+| ------ | --------- |
+| Double | 64        |
+| Float  | 32        |
+| Long   | 64        |
+| Int    | 32        |
+| Short  | 16        |
+| Byte   | 8         |
 
 ```kotlin
 val a: Int = 10000
@@ -367,8 +365,6 @@ val l = 1L + 3 // Long + Int => Long
 list.filter { it > 10 }.map { element -> element * 2 }
 ```
 
-class: center, middle
-
 # Classes and Objects
 
 ## Classes
@@ -386,9 +382,8 @@ class Person(name: String) {
     val customName = name.toUpperCase()
 }
 
-class Person(val firstName: String, val lastName: String, 
-	var age: Int) {
-  // ...
+class Person(val firstName: String, val lastName: String, var age: Int) {
+	// ...
 }
 ```
 
@@ -406,7 +401,7 @@ class Person(val firstName: String, val lastName: String,
 
 ```kotlin
 class Person(val firstName: String, val lastName: String, var age: Int) {
-  // ...
+	// ...
 }
 ```
 
@@ -793,7 +788,7 @@ val ab = object : A(1), B {
 - 或许，我们需要的仅是无父类的一个对象，那么我们可以简单地写为adHoc这种。
 - 就像Java的匿名内部类，在对象表达式里代码可以访问封闭的作用域 （但与Java不同的是，它能访问非final修饰的变量）。
 
-- 对象声明：单例模式是一种非常有用的模式，而在Kotilin（在Scala之后）中很容易就能声明一个单例。DataProviderManager被称为对象声明。如果有一个object关键字在名字前面，这不能再被称为一个_表达式_。 我们不能把这样的东西赋值给变量，但我们可以通过它的名字来引用它。
+- 对象声明：单例模式是一种非常有用的模式，而在Kotilin（在Scala之后）中很容易就能声明一个单例。DataProviderManager被称为对象声明。如果有一个object关键字在名字前面，这不能再被称为一个表达式。 我们不能把这样的东西赋值给变量，但我们可以通过它的名字来引用它。
 
 对象表达式与对象声明语义上的不同
 
@@ -828,7 +823,7 @@ Kotlin 移除了 static 的概念。通常用 companion object 来实现类似�
 - 伴生对象：一个对象声明在一个类里可以标志上companion这个关键字
 - 伴生对象的成员可以使用类名称作为限定符来调用
 - 使用companion关键字时候，伴生对象的名称可以省略
-- 注意，虽然伴生对象的成员在其他语言中看起来像静态成员，但在运行时它们 仍然是实体的实例成员，举例来说，我们能用它实现接口
+- 注意，虽然伴生对象的成员在其他语言中看起来像静态成员，但在运行时它们仍然是实体的实例成员，举例来说，我们能用它实现接口
 - 然而，在JVM中，如果你使用@JvmStatic注解，你可以让伴生对象的成员生成为实际存在的静态方法和域
 
 ## Class Delegation
@@ -906,7 +901,7 @@ e.p = "NEW"
 
 对于一个 只读 属性 (如 val), 一个委托一定会提供一个 getValue函数来获取下面的参数:
 
-- 接收者 — 必须与_属性所有者_类型相同或者是其父类(对于扩展属性，类型范围允许扩大),
+- 接收者 — 必须与属性所有者类型相同或者是其父类(对于扩展属性，类型范围允许扩大),
 - 包含数据 — 一定要是 KProperty<*> 的类型或它的父类型,
 - 这个函数必须返回同样的类型作为属性（或者子类型）
 
@@ -1276,7 +1271,7 @@ fun(x: Int, y: Int): Int = x + y
 
 ### 闭包
 
-一个 lambda 表达式或者匿名函数（以及一个本地函数本地函数和一个 对象表达式） 可以访问他的_闭包_,即声明在外范围内的变量。与java不同，在闭包中捕获的变量可以被修改。
+一个 lambda 表达式或者匿名函数（以及一个本地函数和一个对象表达式） 可以访问他的闭包,即声明在外范围内的变量。与java不同，在闭包中捕获的变量可以被修改。
 
 ### 带接收者得函数字面值
 
@@ -1348,11 +1343,11 @@ fun Int.biggerThanTen(): Boolean {
 }
 ```
 
-声明一个扩展函数，我们需要用一个 接收者类型 也就是被扩展的类型来作为他的前缀。 下面是为MutableList<Int>添加一个swap方法，这个this关键字在扩展方法内接受对应的对象（在点符号以前传过来的） 现在，我们可以像一个其他方法一样调用MutableList<Int>。
+声明一个扩展函数，我们需要用一个 接收者类型 也就是被扩展的类型来作为他的前缀。 下面是为MutableList&lt;Int>添加一个swap方法，这个this关键字在扩展方法内接受对应的对象（在点符号以前传过来的） 现在，我们可以像一个其他方法一样调用MutableList&lt;Int>。
 
 ### 函数扩展
 
-Kotlin和c#、Gosu一样，能够扩展一个类的新功能，而无需继承类或使用任何类型的设计模式，如装饰者。 这通过特殊的声明叫做_extensions_。Kotlin支持_extension functions_ 和 extension properties.
+Kotlin和c#、Gosu一样，能够扩展一个类的新功能，而无需继承类或使用任何类型的设计模式，如装饰者。 这通过特殊的声明叫做_extensions_。Kotlin支持extension functions 和 extension properties.
 
 函数扩展是 Kotlin 最强大的特性之一。
 
@@ -1394,24 +1389,21 @@ Kotlin标准库 The Kotlin Standard Library provides living essentials for every
 
 ## Types
 
-```java
-Java							Kotlin
-
-java.lang.Object				kotlin.Any!
-java.lang.Cloneable			kotlin.Cloneable!
-java.lang.Comparable			kotlin.Comparable!
-java.lang.Enum					kotlin.Enum!
-java.lang.Annotation			kotlin.Annotation!
-java.lang.Deprecated			kotlin.Deprecated!
-java.lang.Void					kotlin.Nothing!
-java.lang.CharSequence		kotlin.CharSequence!
-java.lang.String				kotlin.String!
-java.lang.Number				kotlin.Number!
-java.lang.Throwable			kotlin.Throwable!
-
-int[]							kotlin.IntArray!
-String[]						kotlin.Array<(out) String>!
-```
+| Java                   | Kotlin                      |
+| ---------------------- | --------------------------- |
+| java.lang.Object       | kotlin.Any!                 |
+| java.lang.Cloneable    | kotlin.Cloneable!           |
+| java.lang.Comparable   | kotlin.Comparable!          |
+| java.lang.Enum         | kotlin.Enum!                |
+| java.lang.Annotation   | kotlin.Annotation!          |
+| java.lang.Deprecated   | kotlin.Deprecated!          |
+| java.lang.Void         | kotlin.Nothing!             |
+| java.lang.CharSequence | kotlin.CharSequence!        |
+| java.lang.String       | kotlin.String!              |
+| java.lang.Number       | kotlin.Number!              |
+| java.lang.Throwable    | kotlin.Throwable!           |
+| int[]                  | kotlin.IntArray!            |
+| String[]               | kotlin.Array<(out) String>! |
 
 ## Functions
 
@@ -1429,7 +1421,6 @@ fun <T, R> T.let(block: (T) -> R): R
 fun <T> T.apply(block: T.() -> Unit): T
 fun repeat(times: Int, action: (Int) -> Unit)
 fun <T, R> with(receiver: T, block: T.() -> R): R
-
 ```
 
 ## Functions
@@ -1631,9 +1622,9 @@ fun <T> T.basicToString() : String {  // extension function
 val box = Box(1) // 1 has type Int, so the compiler figures out that we are talking about Box<Int>
 ```
 
-- 首先，我们考虑一下Java中的通配符（wildcards）的意义。该问题在文档 Effective Java, Item 28: Use bounded wildcards to increase API flexibility中给出了详细的解释。 首先，Java中的泛型类型是不变的，即List<String>并不是List<Object>的子类型。 原因在于，如果List是可变的，并不会 优于Java数组。
+- 首先，我们考虑一下Java中的通配符（wildcards）的意义。该问题在文档 Effective Java, Item 28: Use bounded wildcards to increase API flexibility中给出了详细的解释。 首先，Java中的泛型类型是不变的，即List&lt;String>并不是List&lt;Object>的子类型。 原因在于，如果List是可变的，并不会 优于Java数组。
 
-- 通配符类型（wildcard）的声明 ? extends T表明了该方法允许一类对象是 T的子类型，而非必须得是 T本身。 这意味着我们可以安全地从元素（ T的子类集合中的元素）读取 T，同时由于 我们并不知道 T的子类型，所以不能写元素。 反过来，该限制可以让Collection<String>表示为Collection<? extends Object>的子类型。 简而言之，带extends限定（上限）的通配符类型（wildcard）使得类型是协变的（covariant）。
+- 通配符类型（wildcard）的声明 ? extends T表明了该方法允许一类对象是 T的子类型，而非必须得是 T本身。 这意味着我们可以安全地从元素（ T的子类集合中的元素）读取 T，同时由于 我们并不知道 T的子类型，所以不能写元素。 反过来，该限制可以让Collection&lt;String>表示为Collection<? extends Object>的子类型。 简而言之，带extends限定（上限）的通配符类型（wildcard）使得类型是协变的（covariant）。
 
 - out修饰符叫做型变注解，同时由于它在参数类型位置被提供，所以我们讨论声明处型变。 与Java的使用处型变相反，类型使用通配符使得类型协变。另外除了out，Kotlin又补充了一项型变注释：in。它是的变量类型反变：只可以被消费而不可以 被生产。反变类的一个很好的例子是 Comparable
 
@@ -1642,18 +1633,18 @@ val box = Box(1) // 1 has type Int, so the compiler figures out that we are talk
 Kotlin的泛型和Java的有些不同（详见 Generics）。当引入java类型的时候，我们作如下转换：
 
 - Java的通配符转换成类型投射
-  - Foo<? extends Bar> 转换成 Foo<out Bar!>!
-  - Foo<? super Bar> 转换成 Foo<in Bar!>!
+  - Foo<? extends Bar> 转换成 Foo&lt;out Bar!>!
+  - Foo<? super Bar> 转换成 Foo&lt;in Bar!>!
 - Java的原始类型转换成星号投射
-  - List 转换成 List<*>!, 也就是 List<out Any?>!
+  - List 转换成 List<*>!, 也就是 List&lt;out Any?>!
 
 和Java一样，Kotlin在运行时不保留泛型，即对象不知道传递到他们构造器中的那些参数的的实际类型。 
 
-Kotlin的范型就像Java一样不会在运行时保留信息，也就是对象不会携带传递到它们构造函数中的类型参数的信息。也就是说，运行时无法区分ArrayList<Integer>() 和 ArrayList<Character>().
+Kotlin的范型就像Java一样不会在运行时保留信息，也就是对象不会携带传递到它们构造函数中的类型参数的信息。也就是说，运行时无法区分ArrayList&lt;Integer>() 和 ArrayList&lt;Character>().
 
-也就是，ArrayList<Integer>() 和 ArrayList<Character>() 是区分不出来的。 这意味着，不可能用 is-来检测泛型。 
+也就是，ArrayList&lt;Integer>() 和 ArrayList&lt;Character>() 是区分不出来的。 这意味着，不可能用 is-来检测泛型。 
 
-这就导致，无法使用is-检测范型。~~ Kotlin只允许用is-来检测星号投射的泛型类型: Kotlin只允许用is-检测星号投射的范型类型。
+这就导致，无法使用is-检测范型。Kotlin只允许用is-来检测星号投射的泛型类型: Kotlin只允许用is-检测星号投射的范型类型。
 
 # Others
 
@@ -1824,10 +1815,10 @@ bob?.department?.head?.name
 
 当我们有一个可以为空的变量 r，我们可以说 「如果 r 非空，我们使用它；否则使用某个非空的值：
 
-`val l: Int = if (b != null) b.length else -1`  
+`val l: Int = if (b != null) b.length else -1` 
 对于完整的 if-表达式, 可以换成 Elvis 操作符来表达, 写作 ?::
 
-`val l = b?.length ?: -1`  
+`val l = b?.length ?: -1` 
 如果 ?: 的左边表达式是非空的， elvis 操作符就会返回左边的结果, 否则返回右边的内容。
 请注意，仅在左侧为空的时候，右侧表达式才会进行计算。
 
@@ -1932,8 +1923,6 @@ fun main(args: Array<String>) {
 
 构造函数可以像属性和方法那样引用. 它们可以使用在任何一个函数类型的对象的地方， 期望得到相同参数的构造函数，并返回一个适当类型的对象. 构造函数使用::操作符加类名引用.考虑如下函数， 需要一个无参数函数返回类型是Foo
 
-class: center, middle
-
 # Java Interop
 
 ## Calling Java from Kotlin
@@ -1977,7 +1966,7 @@ Kotlin特殊处理一部分java类型。这些类型不是通过as或is来直接
 
 ### Java数组
 
-和Java不同，Kotlin里的数组不是协变的。Kotlin不允许我们把Array<String> 赋值给 Array<Any>， 从而避免了可能的运行时错误。Kotlin也禁止我们把一个子类的数组当做父类的数组传递进Kotlin的方法里。 但是对Java方法，这是允许的（考虑这种形式的平台类型platform types Array<(out) String>!）。
+和Java不同，Kotlin里的数组不是协变的。Kotlin不允许我们把Array&lt;String> 赋值给 Array&lt;Any>， 从而避免了可能的运行时错误。Kotlin也禁止我们把一个子类的数组当做父类的数组传递进Kotlin的方法里。 但是对Java方法，这是允许的（考虑这种形式的平台类型platform types Array<(out) String>!）。
 
 Java平台上，原生数据类型的数组被用来避免封箱/开箱的操作开销。 由于Kotlin隐藏了这些实现细节，就得有一个变通方法和Java代码交互。 每个原生类型的数组都有一个特有类(specialized class)来处理这种问题(IntArray, DoubleArray, CharArray …)。 它们不是Array类，而是被编译成java的原生数组，来获得最好的性能。
 
@@ -2141,8 +2130,8 @@ void f(String a) { }
 
 有时我们想让一个 Kotlin 里的命名函数在字节码里有另外一个 JVM 名字。 最突出的例子就是 类名型擦除:
 
-fun List<String>.filterValid(): List<String>
-fun List<Int>.filterValid(): List<Int>
+fun List&lt;String>.filterValid(): List&lt;String>
+fun List&lt;Int>.filterValid(): List&lt;Int>
 
 这两个函数不能同时定义，因为它们的 JVM 签名是一样的：filterValid(Ljava/util/List;)Ljava/util/List;. 如果我们真的相让它们在 Kotlin里用同一个名字，我们需要用@JvmName去注释它们中的一个（或两个），指定的另外一个名字当参数
 

@@ -134,7 +134,7 @@ class java.util.Arrays$ArrayList
 public inline fun <T> arrayListOf(): ArrayList<T> = ArrayList()
 ```
 
-同样的处理方式，这里的`ArrayList()`是Java中的` java.util.ArrayList`的类型别名：
+同样的处理方式，这里的 `ArrayList()` 是Java中的 `java.util.ArrayList` 的类型别名：
 
 ```kotlin
 @SinceKotlin("1.1") public typealias ArrayList<E> = java.util.ArrayList<E>
@@ -250,8 +250,8 @@ java.util.AbstractList$Itr@438bad7c
 
 Kotlin中的Iterator功能比较简单，并且只能单向移动：
 
-（1） 调用iterator()函数，容器返回一个Iterator实例。iterator()函数是`kotlin.collections.Iterable`中的函数, 被Collection继承。
-（2）调用hasNext()函数检查序列中是否还有元素。
+（1）调用iterator()函数，容器返回一个Iterator实例。iterator()函数是`kotlin.collections.Iterable`中的函数, 被Collection继承。       
+（2）调用hasNext()函数检查序列中是否还有元素。        
 （3）第一次调用Iterator的next()函数时，它返回序列的第一个元素。依次向后递推，使用next()获得序列中的下一个元素。
 
 当我们调用到最后一个元素，再次调用`next()`函数，会抛这个异常`java.util.NoSuchElementException`。代码示例：

@@ -158,7 +158,7 @@ public inline fun <T> Iterable<T>.count(predicate: (T) -> Boolean): Int {
 5
 ```
 
-#### `reduce`从 第一项到最后一项进行累计运算
+#### `reduce`从第一项到最后一项进行累计运算
 
 函数定义：
 
