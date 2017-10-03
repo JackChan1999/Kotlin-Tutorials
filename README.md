@@ -1,4 +1,36 @@
-## Kotlin-Tutorials
+## Kotlin 基础教程
+
+![](assets/kotlin.jpg)
+
+> 十年生死两茫茫，不思量，自难忘，华年短暂，陈辞岁月悠悠伤，
+>
+> 满腔热血已芜荒，展未来，后生强，战战兢兢，如履薄冰心彷徨，
+>
+> 青丝化雪、鬓角成霜，已是英雄迟暮，人生怎慷慨激昂？
+
+对于一个开发者而言，能够胜任系统中任意一个模块的开发是其核心价值的体现。
+
+对于一个架构师而言，掌握各种语言的优势并可以运用到系统中，由此简化系统的开发，是其架构生涯的第一步。
+
+对于一个开发团队而言，能在短期内开发出用户满意的软件系统是起核心竞争力的体现。
+
+每一个程序员都不能固步自封，要多接触新的行业，新的技术领域，突破自我。
+
+## GitHub 托管
+
+https://github.com/JackChan1999/Kotlin-Tutorials
+
+## GitBook 在线阅读
+
+在线阅读，PDF、ePub、Mobi电子书下载
+
+https://www.gitbook.com/book/alleniverson/kotlin-tutorials/details
+
+## Kotlin 极简教程
+
+https://www.gitbook.com/book/alleniverson/easykotlin/details
+
+## 目录
 
 * [前言](README.md)
 * [Kotlin学习资料](Resource/Kotlin学习资料.md)
@@ -95,3 +127,12 @@
 * [IDE](IDE/README.md)
     * [高效地使用你的 IntelliJ](IDE/高效地使用你的 IntelliJ.md)
     * [如何优雅的在微信公众号中编辑代码](IDE/如何优雅的在微信公众号中编辑代码.md)
+
+## 关注我
+
+- Email：<619888095@qq.com>
+- CSDN博客：[Allen Iverson](http://blog.csdn.net/axi295309066)
+- 新浪微博：[AndroidDeveloper](http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1)
+- GitHub：[JackChan1999](https://github.com/JackChan1999)
+- GitBook：[alleniverson](https://www.gitbook.com/@alleniverson)
+- 个人博客：[JackChan](https://jackchan1999.github.io/)
