@@ -1,10 +1,10 @@
 # 遇见未来：Kotlin 1.1发布
 
-上周一的文章里面提到 Kotlin 1.1 rc了，还没正式发布，我在周三的时候把文章转到掘金以后，好多小伙伴告诉我，1.1 已经发布了~
+上周一的文章里面提到 Kotlin 1.1 rc了，还没正式发布，我在周三的时候把文章转到掘金以后，好多小伙伴告诉我，1.1 已经发布了。
 
 tips: 本文有较多外链，公众号阅读时无法跳转，如有需要，请大家点击"阅读原文"。
 
-## 1、更新要点
+## 1. 更新要点
 
 ### 1.1 Coroutine
 
@@ -116,11 +116,11 @@ Whatever，Kotlin 现在都可以支持 node.js 了，还有什么不可能的�
 
 
 
-## 2、Kotlin 元年
+## 2. Kotlin 元年
 
 2016 年是 Kotlin “元年（First year of Kotlin）”，官网给出了这样一幅图来展示它一年来的成绩：
 
-![](https://d3nmt5vlzunoa1.cloudfront.net/kotlin/files/2017/03/GitHub-Stats-1.gif)
+![](images/GitHub-Stats.gif)
 
 Github 上面的代码量都破千万了，使用 Kotlin 的公司也逐渐增多，除了 JetBrains 自己以外，我觉得在 Java 界比较有分量的就是 Square 了，如果 Google 能够稍微提一句 Kotlin ，显然这个故事就会有另外一个令人兴奋的版本——好啦，不要 yy 啦。
 
@@ -153,7 +153,7 @@ Github 上面的代码量都破千万了，使用 Kotlin 的公司也逐渐增�
 
 另外，如果你想要对 Kotlin 持续了解，建议你关注微信公众号 Kotlin，每周一推送的 Kotlin 的相关文章，基本上会覆盖了 Kotlin 的各种最新动态。也欢迎大家跟我交流开发中遇到的问题~
 
-## 3、Kotlin 时代
+## 3. Kotlin 时代
 
 1.1 的重要的更新其实就 Coroutine 以及 JavaScript 支持，毕竟 Kotlin 对 Java 的兼容支持已经做得非常不错了（别老提 apt 的事儿，1.0.4 之后的 kapt 不就基本上很好用了么）。别人问我，Kotlin 到底是写啥的，这个问题我通常说很官方的说，Kotlin 是一门运行在 Java虚拟机、Android、浏览器上的静态语言，可是，Kotlin Team 的节奏已经让这句话显得要过时了。他们用短短几年时间搞出这么个全栈的语言，各方面特性都还很棒，然而他们并不能感到满足，他们已经开始走 C++ 的路线，也许 Kotlin Native 要不了多久就会出现了。
 
@@ -163,4 +163,4 @@ Github 上面的代码量都破千万了，使用 Kotlin 的公司也逐渐增�
 
 十几年前，东家缺钱，急需投资，投资人坐下来“拷问”小马哥：“这个东西（指当时的 OICQ）怎么赚钱？” 小马哥说自己只知道这个东西大家喜欢，但不知道向谁收钱。对于 Kotlin 来说，我只知道它好用，尽管大家都还看不太懂，不过它的时代正在悄悄的到来。
 
-<center>![](../assets/kotlin扫码关注.png)</center>
+<img src="../assets/kotlin扫码关注.png" width="400" />
